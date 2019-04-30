@@ -1,0 +1,13 @@
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  attr_encrypted_options.merge!(encode: true, encode_iv: true, encode_salt: true)
+  attr_encrypted :encrypted_twitter_token, key: ENV["AEKEY"]
+  attr_encrypted :encrypted_github_token_iv, key: ENV["AEKEY"]
+  attr_encrypted :encrypted_twitter_token, key: ENV["AEKEY"]
+  attr_encrypted :encrypted_github_token_iv, key: ENV["AEKEY"]
+
+end

@@ -27,7 +27,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+# gem 'bcrypt', '~> 3.1.7'
+
+gem 'devise', '~> 4.6', '>= 4.6.2'
 
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
 
