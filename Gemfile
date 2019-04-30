@@ -37,6 +37,12 @@ gem 'thin', '~> 1.7', '>= 1.7.2'
 
 gem 'attr_encrypted', '~> 3.1'
 
+gem 'omniauth-oauth2', '~> 1.6'
+
+gem 'omniauth-twitter', '~> 1.4'
+
+gem 'omniauth-github', '~> 1.3'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

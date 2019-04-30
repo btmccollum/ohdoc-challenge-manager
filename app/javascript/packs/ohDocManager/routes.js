@@ -3,14 +3,30 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
 import LandingPage from './components/landingPage';
+import rootReducer from './reducers/rootReducer';
+
+export const store = createStore(
+  rootReducer,
+  compose(
+      applyMiddleware(thunk),
+      // for local testing only
+      // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      
+      // necessary for heroku deployment or some computers encounter a loading error with the above
+      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+  )
+);
 
 const App = (props) => (
-  <Router>
-    <div>
+  <Provider store={store}>
+    <Router>
       <Route exact path='/' component={LandingPage} />
-    </div>
-  </Router>
+    </Router>
+  </Provider>
 )
 
 export default App;
