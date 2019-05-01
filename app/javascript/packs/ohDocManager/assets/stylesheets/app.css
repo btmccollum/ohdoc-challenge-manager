@@ -1,5 +1,5 @@
-// // @import "bootstrap-sprockets";
-// @import "bootstrap";
+/* // // @import "bootstrap-sprockets";
+// @import "bootstrap"; */
 
 .container-fluid {
   padding-right: 0px !important;
@@ -7,5 +7,5 @@
 }
 
 .container {
-  color: red;
+  color: red !important;
 }

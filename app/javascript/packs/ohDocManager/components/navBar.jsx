@@ -6,16 +6,9 @@ import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from '
 class NavigationBar extends React.Component {
     render() {
         return (
-            // <div class="topnav">
-            //     <a class="active" href="#home">Home</a>
-            //     <a href="#news">News</a>
-            //     <a href="#contact">Contact</a>
-            //     <a href="#about">About</a>
-            // </div>
-          
             <Container fluid>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">WDYWE?</Navbar.Brand>
+                    <Navbar.Brand href="#home">ohdoc!</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
