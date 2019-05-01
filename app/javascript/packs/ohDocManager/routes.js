@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import {
   BrowserRouter as Router,
@@ -8,6 +9,7 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import LandingPage from './components/landingPage';
 import rootReducer from './reducers/rootReducer';
+import NavigationBar from './components/navBar'
 
 export const store = createStore(
   rootReducer,
