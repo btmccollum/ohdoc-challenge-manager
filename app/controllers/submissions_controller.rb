@@ -46,5 +46,23 @@ class SubmissionController < ActionController::Base
     #     "content": "RGF5IDA6IEZlYnJ1YXJ5IDMwLCAyMDE2IChFeGFtcGxlIDEpIChkZWxldGUgbWUgb3IgY29tbWVudCBtZSBvdXQpIFRvZGF5J3MgUHJvZ3Jlc3M6IEZpeGVkIENTUywgd29ya2VkIG9uIGNhbnZhcyBmdW5jdGlvbmFsaXR5IGZvciB0aGUgYXBwLiAgVGhvdWdodHM6IEkgcmVhbGx5IHN0cnVnZ2xlZCB3aXRoIENTUywgYnV0LCBvdmVyYWxsLCBJIGZlZWwgbGlrZSBJIGFtIHNsb3dseSBnZXR0aW5nIGJldHRlciBhdCBpdC4gQ2FudmFzIGlzIHN0aWxsIG5ldyBmb3IgbWUsIGJ1dCBJIG1hbmFnZWQgdG8gZmlndXJlIG91dCBzb21lIGJhc2ljIGZ1bmN0aW9uYWxpdHkuICBMaW5rIHRvIHdvcms6IENhbGN1bGF0b3IgQXBw",
     #     "sha": "eb0a318d9b41868e202e13c9b0f3f58c192834d5"
     # }
-end
 
+    # Twitter sample:
+        # curl -XPOST 
+        # --url 'https://api.twitter.com/1.1/statuses/update.json?status=hello' 
+        # --header 'authorization: OAuth
+        # oauth_consumer_key="oauth_customer_key",
+        # oauth_nonce="generated_oauth_nonce",
+        # oauth_signature="generated_oauth_signature",
+        # oauth_signature_method="HMAC-SHA1",
+        # oauth_timestamp="generated_timestamp",
+        # oauth_token="oauth_token",
+        # oauth_version="1.0"'
+        # You many want to change the status from 'hello' to something different.
+
+        # You can use also use any other OAuth helper library you'd like such as twurl.
+
+        # $ twurl -d 'status=Test tweet using the POST statuses/update endpoint' /1.1/statuses/update.json
+    
+
+end
