@@ -7,13 +7,17 @@ class User < ApplicationRecord
 
   # used to handle encryption upon persistance
   attr_encrypted_options.merge!(encode: true, encode_iv: true, encode_salt: true)
-  attr_encrypted :encrypted_twitter_token, key: ENV["AEKEY"]
-  attr_encrypted :encrypted_github_token_iv, key: ENV["AEKEY"]
-  attr_encrypted :encrypted_twitter_token, key: ENV["AEKEY"]
-  attr_encrypted :encrypted_github_token_iv, key: ENV["AEKEY"]
+  attr_encrypted :twitter_token, key: ENV['TKEY']
+  attr_encrypted :github_token, key: ENV['GKEY']
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, on: :create
   validates :password, confirmation: true, on: :create
+
+  # creating jwt token for auth purposes to be passed between rails and react
+  def generate_jwt
+    jwt = Auth.encrypt({id: self.id})
+    return jwt
+  end
 end
