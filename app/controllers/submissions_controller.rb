@@ -1,6 +1,5 @@
 class SubmissionController < ActionController::Base
 
-
     # need to handle both twitter and/or github submissions when applicable
 
     # GitHub:
