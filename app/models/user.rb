@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   # creating jwt token for auth purposes to be passed between rails and react
   def generate_jwt
-    jwt = Auth.encrypt({id: self.id})
+    jwt = TokenAuth.encrypt({id: self.id})
     return jwt
   end
 end

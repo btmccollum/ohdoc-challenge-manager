@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      jwt = Auth.encrypt({id: user.id})
+      jwt = user.generate_jwt
       render json: { user: user, jwt: jwt }, status: :ok
     else
       render json: { errors: user.errors}, status: 422    
