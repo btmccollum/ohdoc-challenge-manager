@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1, defaults: {format: 'json'} do
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
       devise_for :users
       resources :submissions, only: %i[index create show update destroy]
       # get 'pages/root'

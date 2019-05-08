@@ -1,5 +1,6 @@
 class SubmissionController < ActionController::Base
-
+    def show
+    end
     # need to handle both twitter and/or github submissions when applicable
 
     # GitHub:

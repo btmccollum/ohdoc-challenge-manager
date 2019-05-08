@@ -15,6 +15,8 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :password, confirmation: true, on: :create
 
+  has_many :submissions
+
   # creating jwt token for auth purposes to be passed between rails and react
   def generate_jwt
     jwt = Auth.encrypt({id: self.id})
