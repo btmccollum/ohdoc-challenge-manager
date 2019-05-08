@@ -1,5 +1,12 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :authenticate_user!
+    def create
+        user = User.new(user_params)
+
+        if user.save
+            jwt = Auth.encrypt({id: user.id})
+            render json: { user: user, jwt: jwt }, status: :ok
+        end
+    end
 
     private
 

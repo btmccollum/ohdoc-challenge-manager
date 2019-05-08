@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
 
     respond_to :json
 
-    # before_action :underscore_params!
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :authenticate_user
 
     private 
 
+    # allow for additional parameters not permitted by devise natively when applicable
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end
@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
+        # @current_user_id is set by authenticate_user when auth is successful
         @current_user || User.find(@current_user_id)
     end
     
