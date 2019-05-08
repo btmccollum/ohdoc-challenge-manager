@@ -1,7 +1,7 @@
 require 'jwt'
 
 # Used to create JWT tokens for authorization between back and frontend in all controller actions
-class Auth
+class TokenAuth
     # JWT secret key for encrypting/decoding 
     JWT_SECRET = ENV["JWT_SECRET"]
 

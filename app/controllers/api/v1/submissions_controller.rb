@@ -1,6 +1,18 @@
-class SubmissionController < ActionController::Base
-    def show
+class Api::V1::SubmissionsController < ApplicationController
+    def index
+        binding.pry
+        user_submissions = Submission.where("id = ?", current_user.id)
+        render json: { submissions: user_submissions }, status: :ok
     end
+
+    def show
+        binding.pry
+        user_submission = Submission.find_by(params[:id])
+        render json: { submission: user_submission }, status: :ok
+    end
+
+    # def create
+    # end
     # need to handle both twitter and/or github submissions when applicable
 
     # GitHub:
