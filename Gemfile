@@ -47,6 +47,8 @@ gem 'jwt', '~> 2.1'
 
 gem 'faraday', '~> 0.15.4'
 
+gem 'fast_jsonapi'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

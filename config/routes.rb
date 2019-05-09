@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      devise_for :users
-      resources :user, only: %i[show create destroy]
+      devise_for :users, controllers: { registrations: 'api/v1/users'}
+      resources :users, only: %i[show create destroy]
       resources :sessions, only: %i[create destroy]
       resources :submissions, only: %i[index create show update destroy]
       # get 'pages/root'

@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  skip_before_action :authenticate_user, only: %i[create]
+
   def show
     render json: { user: current_user }, status: :ok
   end
@@ -7,8 +9,9 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
+      user_hash = UserSerializer.new(user).serializable_hash
       jwt = user.generate_jwt
-      render json: { user: user, jwt: jwt }, status: :ok
+      render json: { user: user_hash, jwt: jwt }, status: :ok
     else
       render json: { errors: user.errors}, status: 422    
     end
