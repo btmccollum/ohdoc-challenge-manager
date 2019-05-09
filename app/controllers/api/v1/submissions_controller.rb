@@ -1,18 +1,30 @@
 class Api::V1::SubmissionsController < ApplicationController
     def index
-        binding.pry
         user_submissions = Submission.where("id = ?", current_user.id)
+        submission_hash = SubmissionSerializer.new(user_submissions)
         render json: { submissions: user_submissions }, status: :ok
     end
 
     def show
-        binding.pry
         user_submission = Submission.find_by(params[:id])
         render json: { submission: user_submission }, status: :ok
     end
 
     def create
-        Submission.new(params)
+        user_submission = Submission.new(submission_params)
+        submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
+
+        if params[:submission][:twitter]
+            binding.pry
+            # make Twitter call
+        end
+
+        if params[:submission][:github]
+            binding.pry
+            # make GitHub call
+        end
+
+        render json: { submission: submission_hash }, status: :ok
     end
     # need to handle both twitter and/or github submissions when applicable
 

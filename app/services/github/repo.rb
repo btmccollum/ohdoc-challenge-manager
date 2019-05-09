@@ -11,6 +11,13 @@ module Github
         response = Request.get("repos/#{username}/#{repo_name}/contents/#{path}")
         Repo.new(response)
     end
+
+    # takes repo returned from #find and the content to be added
+    # content_string must be Base64 encoded string
+    def self.update_file(repo, content_string)
+      response = Request.post(repo.path, content_string)
+      Repo.new(response)
+    end
   
     def initialize(args = {})
         super(args)

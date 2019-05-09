@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      devise_for :users, controllers: { registrations: 'api/v1/users'}
+      devise_for :users, controllers: { registrations: 'api/v1/users',
+                                        omniauth_callbacks: 'api/v1/users/omniauth_callbacks',
+                                      }
       resources :users, only: %i[show create destroy]
       resources :sessions, only: %i[create destroy]
       resources :submissions, only: %i[index create show update destroy]

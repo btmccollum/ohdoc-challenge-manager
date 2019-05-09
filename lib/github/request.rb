@@ -5,23 +5,28 @@ class Request
     # end
 
     def self.get(id)
-    response, status = self.get_json(username, repo_name, path)
-    status == 200 ? response : errors(response)
+      response, status = self.get_json(username, repo_name, path)
+      status == 200 ? response : errors(response)
+    end
+
+    def self.post(repo, content)
+      response = self.api.post(path, content)
+      binding.pry
     end
 
     def self.errors(response)
-    error = { errors: { status: response["status"], message: response["message"] } }
-    response.merge(error)
+      error = { errors: { status: response["status"], message: response["message"] } }
+      response.merge(error)
     end
 
     def self.get_json(root_path, query = {})
-    query_string = query.map{|key, value| "#{key}=#{value}"}.join("&")
-    path = query.empty?? root_path : "#{root_path}?#{query_string}"
-    response = self.api.get(path)
-    [JSON.parse(response.body), response.status]
+      query_string = query.map{|key, value| "#{key}=#{value}"}.join("&")
+      path = query.empty?? root_path : "#{root_path}?#{query_string}"
+      response = self.api.get(path)
+      [JSON.parse(response.body), response.status]
     end
 
     def self.api
-    Connection.api
+      Connection.api
     end
 end

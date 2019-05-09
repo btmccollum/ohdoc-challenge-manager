@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable
+         :omniauthable, omniauth_providers: %i[github twitter]
 
   # used to handle encryption upon persistance
   attr_encrypted_options.merge!(encode: true, encode_iv: true, encode_salt: true)
