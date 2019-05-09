@@ -11,8 +11,9 @@ class Api::V1::SubmissionsController < ApplicationController
         render json: { submission: user_submission }, status: :ok
     end
 
-    # def create
-    # end
+    def create
+        Submission.new(params)
+    end
     # need to handle both twitter and/or github submissions when applicable
 
     # GitHub:
@@ -75,6 +76,9 @@ class Api::V1::SubmissionsController < ApplicationController
         # You can use also use any other OAuth helper library you'd like such as twurl.
 
         # $ twurl -d 'status=Test tweet using the POST statuses/update endpoint' /1.1/statuses/update.json
-    
+    private
 
+    def submission_params
+        params.require(:submission).permit(:title, :twitter, :github, :content)
+    end
 end

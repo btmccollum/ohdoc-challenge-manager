@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user
-        binding.pry
         if request.headers['Authorization'].present?
             authenticate_or_request_with_http_token do |token|
                 begin
@@ -22,16 +21,16 @@ class ApplicationController < ActionController::Base
 
                     @current_user_id = jwt_payload['id']
                 rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-                    head :unauthorized
+                    render json: {error: 'Invalid Request'}, status: :unauthorized
                 end
             end
         else
-            head :unauthorized
+            render json: {error: 'Invalid Request'}, status: :unauthorized
         end
     end
 
     def authenticate_user!(options = {})
-     head :unauthorized unless signed_in?
+        render json: {error: 'Invalid Request'}, status: :unauthorized unless signed_in?
     end
 
     def current_user

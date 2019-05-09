@@ -14,6 +14,11 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    current_user.destroy
+    render json: { message: "Successful" }, status: 422
+  end
+
   private
 
   def user_params

@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       devise_for :users
+      resources :user, only: %i[show create destroy]
+      resources :sessions, only: %i[create destroy]
       resources :submissions, only: %i[index create show update destroy]
-      resource :user, only: %i[create]
       # get 'pages/root'
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     end
