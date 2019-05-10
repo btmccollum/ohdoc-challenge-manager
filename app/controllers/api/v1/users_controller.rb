@@ -1,13 +1,16 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user, only: %i[create]
 
-  def show
+  def authorize
+    binding.pry
     user_hash = UserSerializer.new(current_user).serializable_hash
-    render json: { user: user_hash }, status: :ok
+    jwt = current_user.generate_jwt
+    render json: { user: user_hash, jwt: jwt }, status: :ok
   end
 
   def create
     user = User.new(user_params)
+    binding.pry
 
     if user.save
       user_hash = UserSerializer.new(user).serializable_hash

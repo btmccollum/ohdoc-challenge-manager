@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.css';
 // import 'bootstrap/dist/css/bootstrap-theme.css';
+import { NavLink } from 'react-router-dom';
 
 class NavigationBar extends React.Component {
     render() {
@@ -25,9 +26,9 @@ class NavigationBar extends React.Component {
 
                         <Nav>
                             <Nav.Link href="#profile">Profile</Nav.Link>
-                            <Nav.Link eventKey={2} href="#logout">
+                            <NavLink to="/logout">
                                 Logout
-                            </Nav.Link>
+                            </NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

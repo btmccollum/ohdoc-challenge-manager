@@ -1,12 +1,13 @@
 class Api::V1::SessionsController < ApplicationController
-  skip_before_action :authenticate_user, only: %i[create]
+  skip_before_action :authenticate_user
 
   def create
-    user_password = params[:password]
-    user_email = params[:email]
+    user_password = params[:user][:password]
+    user_email = params[:user][:email]
     user = user_email.present? && User.find_by(email: user_email)
     user_hash = UserSerializer.new(user).serializable_hash
 
+    binding.pry
     if user.valid_password?(user_password)
       sign_in user
       jwt_token = user.generate_jwt

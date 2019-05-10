@@ -15,40 +15,32 @@ import Login from './containers/login'
 
 // const App = (props) => (
 class App extends Component {
+  componentDidMount() {
+    // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
+    if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser).length < 1 ) {
+      this.props.authenticateUser()
+    }
+  }
+
   render() {
     return (
       <Router>
-        <Route exact path='/' component={LandingPage} />
         <Route exact path ="/" component={ 
                 () => {
-                  if (loggedIn() && linkedStatus()) {
-                    return <Home /> 
-                  } else if (loggedIn() && !linkedStatus()) {
-                    return <Profile />
+                  if (loggedIn()) {
+                    return <LandingPage /> 
                   } else {
                     return <Redirect to="/login"/> 
                   }
                 }
               }/>   
-              <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
-              <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
-              <Route path='/link_account' component={ 
-                () => {
-                  if (loggedIn() && linkedStatus()) {
-                    return <Home /> 
-                  } else if (loggedIn() && !linkedStatus()) {
-                    return <AccountLink />
-                  } else {
-                    return <Redirect to="/login"/> 
-                  }
-                }
-              }/>
-              
-              <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
-              <Route path='/logout' render={ props => { 
-                this.props.logoutUser();
-                return <Redirect to="/"/>  
-              }} />
+        <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
+        {/* <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/> */}
+        <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
+        <Route path='/logout' render={ props => { 
+          this.props.logoutUser();
+          return <Redirect to="/"/>  
+        }} />
       </Router>
     )
   }
@@ -56,10 +48,11 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.user
   }
 }
 
+const githubStatus = () => !!sessionStorage['github']
 const loggedIn = () => !!sessionStorage['logged_in'];
 
 export default connect(mapStateToProps, { logoutUser, authenticateUser })(App);

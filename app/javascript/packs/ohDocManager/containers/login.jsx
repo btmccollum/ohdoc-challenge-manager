@@ -28,13 +28,13 @@ class Login extends Component {
     this.props.loginUser(user, () => this.props.history.push('/'))
   }
 
-  handleErrors = () => {
-    if (this.props.errors) { 
-      return (
-        this.props.errors.map(error => <li key={cuid()}>{error}</li>)
-      )
-    }
-  }
+  // handleErrors = () => {
+  //   if (this.props.errors) { 
+  //     return (
+  //       this.props.errors.map(error => <li key={cuid()}>{error}</li>)
+  //     )
+  //   }
+  // }
 
   componentWillUnmount() {
     if (this.props.errors.length > 0) {
@@ -52,7 +52,7 @@ class Login extends Component {
             <Col md={{ span: 8 }}>
               <Form onSubmit={this.onSubmit} className="login">
               <h1>OHDOC CM Login</h1>
-              <ul>{this.handleErrors()}</ul>
+              {/* <ul>{this.handleErrors()}</ul> */}
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />

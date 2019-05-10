@@ -10,7 +10,7 @@ class User < ApplicationRecord
   attr_encrypted :twitter_token, key: ENV['TKEY']
   attr_encrypted :github_token, key: ENV['GKEY']
 
-  validates :username, presence: true, uniqueness: true
+  # validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, on: :create
   validates :password, confirmation: true, on: :create

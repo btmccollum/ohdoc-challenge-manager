@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'https://localhost:3000/api/v1'
+// const baseUrl = 'https://localhost:3000/api/v1'
+const baseUrl = '/api/v1'
 
 // generate API url based on path pased in
 const create_url = endpoint => { return `${baseUrl}/${endpoint}` }
@@ -8,13 +9,17 @@ const create_url = endpoint => { return `${baseUrl}/${endpoint}` }
 
 const setHeaders = () => { return axios.defaults.headers.common['Authorization'] = `Token ${sessionStorage.getItem('jwt')}` };
 
-const oauthStatus = json => {
-    if (json.github == true) {
-        return sessionStorage.setItem('githubLinked', 'true')
-    }
-
-    if (json.twitter == true) {
-        return sessionStorage.setItem('twitterLinked', 'true')
+const setOauthStatus = json => {
+    if (json.github == true && json.twitter == true) {
+        sessionStorage.setItem('githubLinked', 'true')
+        sessionStorage.setItem('twitterLinked', 'true')
+    } else if (json.github == true && json.twitter == false) {
+        return sessionStorage.setItem('githubLinked', 'false')
+    } else if (json.github == false && json.twitter == true) {
+        return sessionStorage.setItem('twitterLinked', 'false')
+    } else {
+        sessionStorage.setItem('githubLinked', 'false')
+        sessionStorage.setItem('twitterLinked', 'false')
     }
 }
 
@@ -23,7 +28,7 @@ const oauthStatus = json => {
 export const signupUser = (user, callback) => {
     const data = {
     //   body: JSON.stringify({ user })
-        body: user,
+        user: user,
     }
     axios.defaults.headers.common['Authorization'] = null;
 
@@ -33,15 +38,16 @@ export const signupUser = (user, callback) => {
 
       axios.post(create_url('/users'), data)
         .then(json => {
+            debugger;
             sessionStorage.setItem('logged_in', 'true')
             sessionStorage.setItem('jwt', json.data.jwt)
 
             // determine if user has authorized github and/or twitter
-            oauthStatus(json)
+            setOauthStatus(json.data)
 
             dispatch({
                 type: 'SET_USER',
-                payload: json.data
+                payload: json.action.payload.user.data
             });
             callback()
         })
@@ -54,8 +60,7 @@ export const signupUser = (user, callback) => {
 
 export const loginUser = (user, callback) => {
   const data = {
-    // body: JSON.stringify({ user })
-    body: user,
+    user: user,
   }
 
   axios.defaults.headers.common['Authorization'] = null;
@@ -70,12 +75,12 @@ export const loginUser = (user, callback) => {
         sessionStorage.setItem('jwt', json.data.jwt)
         
         // determine if user has authorized github and/or twitter
-        oauthStatus(json)
+        setOauthStatus(json)
         debugger;
 
         dispatch({
             type: 'AUTHENTICATE_USER',
-            payload: json.data
+            payload: json.data.user.data
         })
 
             callback()
@@ -88,21 +93,23 @@ export const loginUser = (user, callback) => {
 }
 
 export const logoutUser = () => {
-  axios.defaults.headers.common['Authorization'] = null;
+  debugger;
+  setHeaders()
 
   if (sessionStorage['jwt']) { 
     sessionStorage.removeItem('jwt') 
-    sessionStorage.removeItem('preference_setting')
   }
 
   sessionStorage.removeItem('logged_in')
   
+  debugger;
   return dispatch => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
-    axios.post(`${baseUrl}/logout`)
+    axios.post(`/logout`)
       .then(resp => {
+        debugger;
         dispatch({
           type: 'LOGOUT_USER',
           payload: ''
@@ -120,9 +127,12 @@ export const authenticateUser = () => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
-  axios.get(`${baseUrl}/load_user`)
+  axios.get(`${baseUrl}/users/authorize`)
     .then( json => {
-      sessionStorage.setItem('preference_setting', json.data.preferences)
+      debugger;
+
+      sessionStorage.setItem('jwt', json.jwt)
+
       dispatch({
         type: 'AUTHENTICATE_USER',
         payload: json.data
