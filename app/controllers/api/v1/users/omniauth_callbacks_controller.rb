@@ -1,37 +1,21 @@
 class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    # def reddit
-    #     user = User.find_by(state_token: params[:state])   
-    
-    #     user.update_from_omniauth(request.env["omniauth.auth"])
-
-    #     if user.save
-    #         user.linked = true
-    #         user.save
+    def github
+        user = User.find_by(state_token: params[:state])  
          
-    #         # redirect_to 'http://localhost:3001'
-    #         # adding redirect for herkou deployment
-    #         redirect_to 'https://droplet-app.herokuapp.com/'
-    #     end   
-    # end
+        temp_url = Faraday.new(url: "https://github.com/login/oauth/access_token")
 
-    def github_authorization
-        current_user.generate_state_token
-        
-        auth= Faraday.new(:url => 'https://github.com/login/oauth/authorize')
-
-        auth_request = auth.get do |req|
-            # req.headers['Authorization'] = "bearer #{current_user.reddit_token}"
-            # req.headers['User-Agent'] = "Ruby:Droplet API/0.0.0 by u/unovie"
-            # req.params['limit'] = 100
-            req.headers['client_id'] = ENV["GITHUB_KEY"]
-            req.headers['redirect_uri'] = ENV["GH_RURI"]
-            req.headers['state'] = current_user.state_token
+        auth_code_request = temp_url.post do |req|
+          client_id: ENV['GITHUB_KEY'],
+          client_secret: ENV['GITHUB_SECRET'],
+          code: params[:code],
         end
 
-        redirect_to 
-    end
-
-    def github
+        binding.pry
+        # response will be form of access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
+        
+        # calls are made with 
+        # Authorization: token OAUTH-TOKEN
+        # GET https://api.github.com/user
         user.update_from_omniauth(request.env["omniauth.auth"])
 
         if user.save

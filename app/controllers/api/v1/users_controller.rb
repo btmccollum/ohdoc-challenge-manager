@@ -23,15 +23,20 @@ class Api::V1::UsersController < ApplicationController
     render json: { message: "Successful" }, status: 422
   end
 
+  # a user must be redirected to GitHub's access page to provide authorization to app
   def github_authorization
     current_user.generate_state_token
-    auth = Faraday.new(:url => 'https://github.com/login/oauth/authorize')
+   
+    # state token is for our use only, state token ensures client is the same on both ends
+    query_params = {
+      client_id: ENV['GITHUB_KEY'],
+      redirect_uri: ENV['GH_RURI'],
+      state: current_user.state_token,
+    }.to_query
 
-    auth_request = auth.get do |req|
-        req.headers['client_id'] = ENV["GITHUB_KEY"]
-        req.headers['redirect_uri'] = ENV["GH_RURI"]
-        req.headers['state'] = current_user.state_token
-    end
+    url = "https://github.com/login/oauth/authorize"
+    
+    redirect_to "#{url}?#{query_params}"
   end
 
   private
