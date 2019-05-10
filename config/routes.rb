@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[show create destroy]
       resources :sessions, only: %i[create destroy]
       resources :submissions, only: %i[index create show update destroy]
-      # get 'pages/root'
+      
+      get 'github_authorization', to: "users#github_authorization"
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     end
   end

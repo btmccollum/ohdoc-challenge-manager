@@ -49,6 +49,8 @@ gem 'faraday', '~> 0.15.4'
 
 gem 'fast_jsonapi'
 
+gem 'sysrandom'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

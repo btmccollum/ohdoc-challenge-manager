@@ -22,6 +22,7 @@ class Api::V1::SubmissionsController < ApplicationController
         if params[:submission][:github]
             binding.pry
             # make GitHub call
+            # append_file = Github::Repo.
         end
 
         render json: { submission: submission_hash }, status: :ok

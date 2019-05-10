@@ -22,4 +22,10 @@ class User < ApplicationRecord
     jwt = TokenAuth.encrypt({id: self.id})
     return jwt
   end
+
+  def generate_state_token
+    self.state_token = Sysrandom.urlsafe_base64(32)
+    self.save
+    return self.state_token
+  end
 end
