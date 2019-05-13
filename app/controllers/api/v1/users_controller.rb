@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
   def github_authorization
     current_user.generate_state_token
    
-    # state token is for our use only, state token ensures client is the same on both ends
+    # state token is for our use only, state token ensures client is the same on both ends when it comes back to oauth callback
     redirect_info = {
       query_params: {
         client_id: ENV['GITHUB_KEY'],

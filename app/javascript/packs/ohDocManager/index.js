@@ -1,12 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './routes';
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './reducers/rootReducer';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { authenticateUser } from './actions/userActions';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './routes'
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from './reducers/rootReducer'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { authenticateUser } from './actions/userActions'
 
 export const store = createStore(
   rootReducer,

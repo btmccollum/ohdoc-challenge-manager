@@ -13,8 +13,7 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
               req.params['client_secret'] = ENV['GITHUB_SECRET']
               req.params['code'] = params[:code]
             end
-            # response will be form of access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
-            
+        
             # calls are made with 
             # Authorization: token OAUTH-TOKEN
             # GET https://api.github.com/user
