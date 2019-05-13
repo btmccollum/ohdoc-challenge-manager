@@ -25,7 +25,7 @@ class Signup extends Component {
       event.preventDefault()
       const user = this.state
       // action to create user account and callback to redirect to link account page
-      this.props.signupUser(user, () => this.props.history.push('/link_account'))
+      this.props.signupUser(user, () => this.props.history.push('/'))
     }
 
     handleErrors = () => {
@@ -38,7 +38,6 @@ class Signup extends Component {
     }
 
     componentWillUnmount() {
-      // clearing subreddits when unmounted so a fresh list is populated when revisted
       if (this.props.errors.length > 0) {
         clearErrors()
       }
