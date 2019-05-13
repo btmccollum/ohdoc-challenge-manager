@@ -3,8 +3,13 @@ import NavigationBar from './navBar'
 import TweetForm from './tweet/tweetForm'
 import CommitForm from './github/commitForm'
 import RepoDisplay from '../containers/repoDisplay'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 class LandingPage extends React.Component {
+  showGithub = () => {
+    console.log()
+  }
+
   render() {
     return(
       <div>
@@ -12,7 +17,6 @@ class LandingPage extends React.Component {
         <RepoDisplay />
         <TweetForm />
         <CommitForm />
-        <h1>Hello World</h1>
       </div>
     )
   }

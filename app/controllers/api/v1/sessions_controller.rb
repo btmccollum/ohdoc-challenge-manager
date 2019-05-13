@@ -7,7 +7,6 @@ class Api::V1::SessionsController < ApplicationController
     user = user_email.present? && User.find_by(email: user_email)
     user_hash = UserSerializer.new(user).serializable_hash
 
-    binding.pry
     if user.valid_password?(user_password)
       sign_in user
       jwt_token = user.generate_jwt

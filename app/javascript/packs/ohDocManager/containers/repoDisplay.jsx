@@ -7,7 +7,7 @@ import { linkGithubAccount } from '../actions/userActions'
 class RepoDisplay extends React.Component {
 
     accountStatusBox = () => {
-        if (this.props.user.github === true) {
+        if (this.props.user.github_linked == "true") {
             return ( <span>GitHub Account is Linked.</span> )
         } else {
             return (
@@ -17,6 +17,11 @@ class RepoDisplay extends React.Component {
             )
         }
     }
+
+    // FOR TESTING PURPOSES ONLY
+    showGithub = () => {
+        console.log(this.state.user)
+    }
     
     render() {
         return (
@@ -24,6 +29,11 @@ class RepoDisplay extends React.Component {
                 <Row>
                     <Col>
                         {this.accountStatusBox()}
+                        <Button onClick={() => {
+                            console.log(this.props.user)
+                            console.log(sessionStorage.getItem('jwt'))
+                            console.log(sessionStorage.getItem('logged_in'))
+                            }}>Show Github Info</Button>
                     </Col>
                 </Row>
             </Container>

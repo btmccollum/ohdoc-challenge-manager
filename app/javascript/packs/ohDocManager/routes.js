@@ -15,9 +15,9 @@ import Login from './containers/login'
 
 // const App = (props) => (
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
-    if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser).length < 1 ) {
+    if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser.currentUser).length < 1 ) {
       this.props.authenticateUser()
     }
   }

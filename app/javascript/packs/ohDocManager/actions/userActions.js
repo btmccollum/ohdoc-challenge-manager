@@ -38,7 +38,6 @@ export const signupUser = (user, callback) => {
 
       axios.post(create_url('/users'), data)
         .then(json => {
-            debugger;
             sessionStorage.setItem('logged_in', 'true')
             sessionStorage.setItem('jwt', json.data.jwt)
 
@@ -52,7 +51,6 @@ export const signupUser = (user, callback) => {
             callback()
         })
         .catch(error => {
-            debugger;
             dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
         })
     }
@@ -76,24 +74,20 @@ export const loginUser = (user, callback) => {
         
         // determine if user has authorized github and/or twitter
         setOauthStatus(json)
-        debugger;
 
         dispatch({
             type: 'AUTHENTICATE_USER',
             payload: json.data.user.data
         })
-
             callback()
         })
         .catch(error => {
-            debugger;
             dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
         })
   }
 }
 
 export const logoutUser = () => {
-  debugger;
   setHeaders()
 
   if (sessionStorage['jwt']) { 
@@ -102,14 +96,12 @@ export const logoutUser = () => {
 
   sessionStorage.removeItem('logged_in')
   
-  debugger;
   return dispatch => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
     axios.post(`/logout`)
       .then(resp => {
-        debugger;
         dispatch({
           type: 'LOGOUT_USER',
           payload: ''
@@ -127,16 +119,15 @@ export const authenticateUser = () => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
-  axios.get(`${baseUrl}/users/authorize`)
-    .then( json => {
-      debugger;
+    axios.get(`${baseUrl}/users/authorize`)
+      .then( json => {
+        sessionStorage.setItem('logged_in', 'true')
+        sessionStorage.setItem('jwt', json.data.jwt)
 
-      sessionStorage.setItem('jwt', json.jwt)
-
-      dispatch({
-        type: 'AUTHENTICATE_USER',
-        payload: json.data
-      })
+        dispatch({
+          type: 'AUTHENTICATE_USER',
+          payload: json.data.user.data
+        })
     })
 }
 }
@@ -171,16 +162,14 @@ setHeaders()
 
 return dispatch => {
 //  axios would normally be used, fetch variant placed for purposes of demonstration
-  fetch(create_url('/github_authorization'))
-    .then(resp => resp.json())
-      .then(json => {
-          debugger;
-        // automatically redirecting the user to the reddit authorization link to authorize the app, will be redirected back to site after accepting
-        // window.location = `${json.url}${json.query_params}`
-      })
-      .catch(error => {
-        debugger;
-        dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+  axios.get(create_url('/github_authorization'))
+    .then(json => {
+      // automatically redirecting the user to the reddit authorization link to authorize the app, will be redirected back to site after accepting
+      const resp = json.data
+      window.location = `${resp.url}${resp.query_params}`
     })
+    .catch(error => {
+      dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+  })
 }
 }

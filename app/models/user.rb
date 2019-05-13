@@ -28,4 +28,10 @@ class User < ApplicationRecord
     self.save
     return self.state_token
   end
+
+  def update_from_omniauth(auth)
+    self.provider = auth.provider
+    self.uid = auth.id
+    self.github_token = auth.credentials.token
+  end
 end

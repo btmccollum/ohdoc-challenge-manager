@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user, only: %i[create]
 
   def authorize
-    binding.pry
+    
     user_hash = UserSerializer.new(current_user).serializable_hash
     jwt = current_user.generate_jwt
     render json: { user: user_hash, jwt: jwt }, status: :ok
@@ -10,7 +10,6 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    binding.pry
 
     if user.save
       user_hash = UserSerializer.new(user).serializable_hash
@@ -31,15 +30,16 @@ class Api::V1::UsersController < ApplicationController
     current_user.generate_state_token
    
     # state token is for our use only, state token ensures client is the same on both ends
-    query_params = {
-      client_id: ENV['GITHUB_KEY'],
-      redirect_uri: ENV['GH_RURI'],
-      state: current_user.state_token,
-    }.to_query
+    redirect_info = {
+      query_params: {
+        client_id: ENV['GITHUB_KEY'],
+        redirect_uri: ENV['GH_RURI'],
+        state: current_user.state_token,
+      }.to_query,
+      url: "https://github.com/login/oauth/authorize?"
+    }
 
-    url = "https://github.com/login/oauth/authorize"
-    
-    redirect_to "#{url}?#{query_params}"
+    render json: redirect_info
   end
 
   private
