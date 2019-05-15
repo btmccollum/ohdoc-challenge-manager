@@ -17,25 +17,26 @@ const setHeaders = (option) => {
 }
 
 export const createSubmission = entryData => {
+    const data = { submission: entryData }
+
     setHeaders()
 
     debugger
 
-    const data = { submission: entryData }
-
     return dispatch => {
        
-    dispatch({ type: "LOADING_SUBMISSION_DATA" })
+        dispatch({ type: "LOADING_SUBMISSION_DATA" })
 
-    axios.post(creat_url('/submissions'), data) 
-        .then(json => {
-            dispatch({ 
-                type: "CREATE_SUBMISSION",
-                payload: json
+        axios.post(create_url('/submissions'), data) 
+            .then(json => {
+                debugger;
+                dispatch({ 
+                    type: "CREATE_SUBMISSION",
+                    payload: json
+                })
             })
-        })
-        .catch(error => {
-            dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
-        })
+            .catch(error => {
+                dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+            })
     }
 }

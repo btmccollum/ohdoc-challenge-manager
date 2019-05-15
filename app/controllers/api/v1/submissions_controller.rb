@@ -11,8 +11,10 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def create
+        binding.pry
         user_submission = Submission.new(submission_params)
         submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
+        binding.pry
 
         if params[:submission][:twitter]
             binding.pry
@@ -25,6 +27,7 @@ class Api::V1::SubmissionsController < ApplicationController
             # append_file = Github::Repo.
         end
 
+        binding.pry
         render json: { submission: submission_hash }, status: :ok
     end
     # need to handle both twitter and/or github submissions when applicable
