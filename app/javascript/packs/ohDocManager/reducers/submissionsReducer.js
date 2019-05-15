@@ -1,14 +1,14 @@
-function submissionsReducer(state = { submissions: [], loading: false }, action) {
+export default function submissionsReducer(state = { submissions: [], loading: false }, action) {
     switch(action.type) {
         case "LOADING_SUBMISSION_DATA":
+            debugger
             return { ...state, loading: true }
+
         case "CREATE_SUBMISSION":
-            debugger;
-            return { ...state, submissions: [...action], loading: false }
+            debugger
+            return { ...state, submissions: [action], loading: false }
 
         default:
             return state;
     }
 }
-
-export default submissionsReducer;

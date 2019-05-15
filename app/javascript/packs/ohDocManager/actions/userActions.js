@@ -43,7 +43,7 @@ export const signupUser = (user, callback) => {
       // updating load status while async action executes
       dispatch({ type: "LOADING_USER_INFO"})
 
-      axios.post(create_url('/users'), data)
+      axios.post(create_url('users'), data)
         .then(json => {
             sessionStorage.setItem('logged_in', 'true')
             sessionStorage.setItem('jwt', json.data.jwt)
@@ -74,7 +74,7 @@ export const loginUser = (user, callback) => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
-    axios.post(create_url('/sessions'), data)
+    axios.post(create_url('sessions'), data)
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', json.data.jwt)
@@ -169,7 +169,7 @@ setHeaders()
 
 return dispatch => {
 //  axios would normally be used, fetch variant placed for purposes of demonstration
-  axios.get(create_url('/github_authorization'))
+  axios.get(create_url('github_authorization'))
     .then(json => {
       // automatically redirecting the user to the reddit authorization link to authorize the app, will be redirected back to site after accepting
       const resp = json.data

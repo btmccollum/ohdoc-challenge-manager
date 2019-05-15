@@ -95,6 +95,6 @@ class Api::V1::SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:title, :twitter, :github, :content)
+        params.require(:submission).permit(:title, :twitter, :github, :content, :submission)
     end
 end
