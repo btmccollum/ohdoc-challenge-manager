@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { createSubmission } from '../../actions/submissionActions'
 
 class CommitForm extends React.Component {
     state = {
@@ -21,7 +22,8 @@ class CommitForm extends React.Component {
     
     handleOnSubmit = event => {
         event.preventDefault()
-    
+
+        createSubmission(state)
         // add logic to submit submission request to backend
     }
 

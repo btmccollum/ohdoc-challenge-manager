@@ -8,6 +8,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { authenticateUser } from './actions/userActions'
 
+// foreman start -f Procfile.dev -p 3000
+
 export const store = createStore(
   rootReducer,
   compose(
