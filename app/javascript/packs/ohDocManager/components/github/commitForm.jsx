@@ -1,6 +1,8 @@
 import React from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { createSubmission } from '../../actions/submissionActions'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class CommitForm extends React.Component {
     state = {
@@ -23,7 +25,7 @@ class CommitForm extends React.Component {
     handleOnSubmit = event => {
         event.preventDefault()
 
-        createSubmission(this.state)
+        this.props.createSubmission(this.state)
         // add logic to submit submission request to backend
     }
 
@@ -92,4 +94,8 @@ class CommitForm extends React.Component {
     }
 }
 
-export default CommitForm
+const mapDispatchToProps = dispatch => bindActionCreators({
+    createSubmission
+  }, dispatch)
+
+export default connect(null, mapDispatchToProps)(CommitForm)

@@ -21,12 +21,10 @@ export const createSubmission = (entryData) => {
 
     setHeaders()
 
-    debugger
-
     return dispatch => {
       dispatch({ type: "LOADING_SUBMISSION_DATA" })
 
-      axios.post('api/v1/submissions', data) 
+      axios.post(create_url('submissions'), data) 
           .then(json => {
               debugger
               dispatch({ 
@@ -34,8 +32,8 @@ export const createSubmission = (entryData) => {
                   payload: json
               })
           })
-          // .catch(error => {
-          //     dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
-          // })
+          .catch(error => {
+              dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+          })
     }
 }

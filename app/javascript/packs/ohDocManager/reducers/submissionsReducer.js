@@ -1,7 +1,6 @@
 export default function submissionsReducer(state = { submissions: [], loading: false }, action) {
     switch(action.type) {
         case "LOADING_SUBMISSION_DATA":
-            debugger
             return { ...state, loading: true }
 
         case "CREATE_SUBMISSION":

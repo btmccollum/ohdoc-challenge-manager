@@ -11,8 +11,19 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def create
+
+        content = "
+            Name: #{submission_params[:repoName]}
+            Path: #{submission_params[:filePath]}
+
+            Title: #{submission_params[:entryTitle]}
+            Progress: #{submission_params[:progress]}
+            Thougts: #{submission_params[:thougts]}
+        "
         binding.pry
-        user_submission = Submission.new(submission_params)
+        user_submission = Submission.new
+        user_submission.title = submission_params[:entryTitle]
+        user_submission.content = submission_params[:entryTitle]
         submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
         binding.pry
 
@@ -95,6 +106,6 @@ class Api::V1::SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:title, :twitter, :github, :content, :submission)
+        params.require(:submission).permit(:title, :twitter, :github, :content, :repoName, :filePath, :entryTitle, :progress, :thoughts, :link)
     end
 end
