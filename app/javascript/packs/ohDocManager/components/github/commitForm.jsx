@@ -25,7 +25,7 @@ class CommitForm extends React.Component {
     handleOnSubmit = event => {
         event.preventDefault()
 
-        this.props.createSubmission(this.state)
+        this.props.createSubmission(this.state, "github")
         // add logic to submit submission request to backend
     }
 

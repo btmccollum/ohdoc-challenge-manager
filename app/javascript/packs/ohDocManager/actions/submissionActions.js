@@ -16,8 +16,8 @@ const setHeaders = (option) => {
   }
 }
 
-export const createSubmission = (entryData) => {
-    const data = { submission: entryData }
+export const createSubmission = (entryData, service) => {
+    const data = { submission: entryData, service }
 
     setHeaders()
 

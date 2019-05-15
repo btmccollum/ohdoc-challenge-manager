@@ -11,28 +11,37 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def create
+        # sample:
+        # ### Day 1: January 2, 2019 
+
+        # **Today's Progress**: Worked through the Flatiron lessons for asynchronous JavaScript. Started with basic XHR and then AJAX/Callbacks and JS' fetch() method using the GitHub API. Spent quite a bit of time practicing with the GitHub API- pulling repos, creating forks, pulling/posting issues/commits, etc.. 
+
+        # **Thoughts:** This was my first real exposure to using APIs and it was definitely an interesting learning experience. I feel like I've got a pretty good grasp on the various AJAX/jQuery/vanilla JS involved in pulling from and posting through an API. Biggest lesson today: slow down! I found myself spending a big too much time banging my head against a wall only to realize it was some small mistake in one of my calls. D'oh! Most of my time was spent trying to troubleshoot through the Github API docs rather than my code, as simple as it was. I'd really love to slim down my code and clean it up. I feel like it may still be more messy than I'd like, but hey it's working!
+
+        # **Time Spent Today:** 8 hours
+
+        # **Journey Time** 724 hours
+
 
         content = "
-            Name: #{submission_params[:repoName]}
-            Path: #{submission_params[:filePath]}
+            ### #{submission_params[:entryTitle]}
 
-            Title: #{submission_params[:entryTitle]}
-            Progress: #{submission_params[:progress]}
-            Thougts: #{submission_params[:thougts]}
+            **Today's Progress:** #{submission_params[:progress]}
+
+            **Thoughts:** #{submission_params[:thougts]}
+
+            **Link(s): #{submission_params[:link]}
         "
-        binding.pry
         user_submission = Submission.new
         user_submission.title = submission_params[:entryTitle]
-        user_submission.content = submission_params[:entryTitle]
+        user_submission.content = content
         submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
         binding.pry
 
-        if params[:submission][:twitter]
+        if params[:service] == "twitter"
             binding.pry
             # make Twitter call
-        end
-
-        if params[:submission][:github]
+        elsif params[:service] == "github"
             binding.pry
             # make GitHub call
             # append_file = Github::Repo.
