@@ -59,7 +59,7 @@ export const signupUser = (user, callback) => {
             callback()
         })
         .catch(error => {
-            dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+            dispatch({ type: 'SHOW_ERROR', message: error.response })
         })
     }
 }

@@ -35,6 +35,7 @@ class Api::V1::UsersController < ApplicationController
         client_id: ENV['GITHUB_KEY'],
         redirect_uri: ENV['GH_RURI'],
         state: current_user.state_token,
+        scope: "repo" 
       }.to_query,
       url: "https://github.com/login/oauth/authorize?"
     }
@@ -45,6 +46,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :twitter_token, :github_token)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :twitter_token, :github_token)
   end
 end

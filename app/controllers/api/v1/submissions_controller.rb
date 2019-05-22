@@ -31,24 +31,40 @@ class Api::V1::SubmissionsController < ApplicationController
             **Thoughts:** #{submission_params[:thougts]}
 
             **Link(s): #{submission_params[:link]}
-        "
-        user_submission = Submission.new
-        user_submission.title = submission_params[:entryTitle]
-        user_submission.content = content
-        submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
+        # "
+        # user_submission = Submission.new
+        # user_submission.title = submission_params[:entryTitle]
+        # user_submission.content = content
+        # submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
         binding.pry
 
         if params[:service] == "twitter"
             binding.pry
             # make Twitter call
         elsif params[:service] == "github"
+            api = Faraday.new('https://api.github.com/repos/btmccollum/test_repo/contents/log.md')
+  
+            repo_details = api.get do |req|
+                req.headers['User-Agent'] = 'OHDOC Challenge Manager'
+                req.headers['Authorization'] = "token #{current_user.github_token}"
+            end
+
+            repo_info = JSON.parse(repo_details.body)
+
+            # edit_file = api.put do |req|
+            #     req.headers['User-Agent'] = 'OHDOC Challenge Manager'
+            #     req.headers['Authorization'] = "token #{current_user.github_token}"
+            # end
+
+            # sha = repo_details
+
             binding.pry
             # make GitHub call
             # append_file = Github::Repo.
         end
 
         binding.pry
-        render json: { submission: submission_hash }, status: :ok
+        # render json: { submission: submission_hash }, status: :ok
     end
     # need to handle both twitter and/or github submissions when applicable
 
