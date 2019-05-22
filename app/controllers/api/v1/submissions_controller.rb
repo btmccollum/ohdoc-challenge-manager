@@ -13,18 +13,15 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def create
-        # user_submission = Submission.new
-        # user_submission.title = submission_params[:entryTitle]
-        # user_submission.content = content
-        # submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
-        binding.pry
+        user_submission = Submission.new
+        user_submission.user_id = current_user.id
 
         if params[:service] == "twitter"
             binding.pry
             # make Twitter call
         elsif params[:service] == "github"
             # creating content markdown blurb to add to user's existing log md file on github
-            content = "### #{submission_params[:entryTitle]}\n\n **Today's Progress:** #{submission_params[:progress]}\n\n **Thoughts:** #{submission_params[:thoughts]}\n\n **Link(s):** #{submission_params[:link]} "
+            content = "### #{submission_params[:entryTitle]}\n\n **Today's Progress:** #{submission_params[:progress]}\n\n **Thoughts:** #{submission_params[:thoughts]}\n\n **Link(s):** #{submission_params[:link]}\n "
 
             api = Faraday.new('https://api.github.com/repos/btmccollum/test_repo/contents/log.md')
   
@@ -53,8 +50,15 @@ class Api::V1::SubmissionsController < ApplicationController
             end
         end
 
-        binding.pry
-        # render json: { submission: submission_hash }, status: :ok
+        user_submission.title = submission_params[:entryTitle]
+
+        if user_submission.save
+            submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
+            render json: { submission: submission_hash }, status: :ok
+        else
+            binding.pry
+            render json: { errors: user_submission.errors}, status: 422   
+        end
     end
     
     private
