@@ -6,6 +6,9 @@ export default function submissionsReducer(state = { submissions: [], loading: f
         case "CREATE_SUBMISSION":
             return { ...state, submissions: [...state.submissions, action.payload], loading: false }
 
+        case "GET_SUBMISSIONS":
+            return { ...state, submissions: [...state.submissions, action.payload], loading: false }
+
         default:
             return state;
     }

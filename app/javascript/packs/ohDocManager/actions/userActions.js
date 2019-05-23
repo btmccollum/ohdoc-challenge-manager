@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getSubmissions } from './submissionActions';
 
 // const baseUrl = 'https://localhost:3000/api/v1'
 const baseUrl = '/api/v1'
@@ -135,6 +136,8 @@ export const authenticateUser = () => {
           type: 'AUTHENTICATE_USER',
           payload: json.data.user.data
         })
+
+        dispatch(getSubmissions())
     })
 }
 }

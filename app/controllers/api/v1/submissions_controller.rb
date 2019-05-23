@@ -2,7 +2,7 @@ require "base64"
 
 class Api::V1::SubmissionsController < ApplicationController
     def index
-        user_submissions = Submission.where("id = ?", current_user.id)
+        user_submissions = Submission.where("user_id = ?", current_user.id)
         submission_hash = SubmissionSerializer.new(user_submissions)
         render json: { submissions: user_submissions }, status: :ok
     end
@@ -48,6 +48,10 @@ class Api::V1::SubmissionsController < ApplicationController
                 req.headers['Authorization'] = "token #{current_user.github_token}"
                 req.body = data
             end
+
+            # setting github specific data
+            user_submission.github = true 
+            user_submission.content = content
         end
 
         user_submission.title = submission_params[:entryTitle]

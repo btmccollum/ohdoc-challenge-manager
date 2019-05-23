@@ -36,3 +36,23 @@ export const createSubmission = (entryData, service) => {
           })
     }
 }
+
+export const getSubmissions = () => {
+  setHeaders()
+  console.log('go go go!')
+
+  return dispatch => {
+    dispatch({ type: "LOADING_SUBMISSION_DATA" })
+
+    axios.get(create_url('submissions')) 
+        .then(json => {
+            dispatch({ 
+                type: "GET_SUBMISSIONS",
+                payload: json.data.submissions
+            })
+        })
+        .catch(error => {
+            dispatch({ type: 'SHOW_ERROR', message: error.response })
+        })
+  }
+}
