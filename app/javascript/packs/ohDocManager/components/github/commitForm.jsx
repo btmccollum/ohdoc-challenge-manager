@@ -26,6 +26,14 @@ class CommitForm extends React.Component {
         event.preventDefault()
 
         this.props.createSubmission(this.state, "github")
+        this.setState({
+                repoName: "",
+                filePath: "",
+                entryTitle: "",
+                progress: "",
+                thoughts: "",
+                link: "",
+            })
         // add logic to submit submission request to backend
     }
 

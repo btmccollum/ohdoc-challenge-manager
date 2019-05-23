@@ -26,14 +26,13 @@ export const createSubmission = (entryData, service) => {
 
       axios.post(create_url('submissions'), data) 
           .then(json => {
-              debugger
               dispatch({ 
                   type: "CREATE_SUBMISSION",
-                  payload: json
+                  payload: json.data.submission.data
               })
           })
           .catch(error => {
-              dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+              dispatch({ type: 'SHOW_ERROR', message: error.response })
           })
     }
 }

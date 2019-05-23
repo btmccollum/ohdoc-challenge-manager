@@ -40,7 +40,7 @@ class Api::V1::SubmissionsController < ApplicationController
             new_file_content = Base64.encode64(file_content)
 
             # git commit must be in json format 
-            data = { message: 'adding 100 doc log', sha: repo_sha, content: new_file_content }.to_json
+            data = { message: "Adding log for: #{submission_params[:entryTitle]}", sha: repo_sha, content: new_file_content }.to_json
 
             # sending put request to append new content to existing md log file 
             edit_file = api.put do |req|
