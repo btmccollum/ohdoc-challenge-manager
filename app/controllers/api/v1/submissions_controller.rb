@@ -18,6 +18,7 @@ class Api::V1::SubmissionsController < ApplicationController
 
         if params[:service] == "twitter"
             binding.pry
+      
             # make Twitter call
         elsif params[:service] == "github"
             # creating content markdown blurb to add to user's existing log md file on github

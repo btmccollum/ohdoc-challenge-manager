@@ -95,7 +95,6 @@ class CommitForm extends React.Component {
                         </Form>
                     </Col>
                 </Row>
-                <Button onClick={() => console.log(this.state)}></Button>
             </Container>         
         )
     }
