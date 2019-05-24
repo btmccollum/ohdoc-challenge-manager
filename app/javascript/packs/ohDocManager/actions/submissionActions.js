@@ -39,7 +39,6 @@ export const createSubmission = (entryData, service) => {
 
 export const getSubmissions = () => {
   setHeaders()
-  console.log('go go go!')
 
   return dispatch => {
     dispatch({ type: "LOADING_SUBMISSION_DATA" })

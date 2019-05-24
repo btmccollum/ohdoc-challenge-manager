@@ -20,15 +20,15 @@ const setHeaders = (option) => {
 // sets Oauth linked status for github and/or twitter for app logic display options, will be replaced by passing the same info from backend
 const setOauthStatus = json => {
     if (json.github == true && json.twitter == true) {
-        sessionStorage.setItem('githubLinked', 'true')
-        sessionStorage.setItem('twitterLinked', 'true')
+        sessionStorage.setItem('githubLinked', true)
+        sessionStorage.setItem('twitterLinked', true)
     } else if (json.github == true && json.twitter == false) {
-        return sessionStorage.setItem('githubLinked', 'false')
+        return sessionStorage.setItem('githubLinked', false)
     } else if (json.github == false && json.twitter == true) {
-        return sessionStorage.setItem('twitterLinked', 'false')
+        return sessionStorage.setItem('twitterLinked', false)
     } else {
-        sessionStorage.setItem('githubLinked', 'false')
-        sessionStorage.setItem('twitterLinked', 'false')
+        sessionStorage.setItem('githubLinked', false)
+        sessionStorage.setItem('twitterLinked', false)
     }
 }
 
@@ -167,18 +167,36 @@ export const deleteUser = id => {
 
 export const linkGithubAccount = () => {
 // manually setting data object for sake of fetch display
-setHeaders()
+  setHeaders()
 
-return dispatch => {
-//  axios would normally be used, fetch variant placed for purposes of demonstration
-  axios.get(create_url('github_authorization'))
-    .then(json => {
-      // automatically redirecting the user to the reddit authorization link to authorize the app, will be redirected back to site after accepting
-      const resp = json.data
-      window.location = `${resp.url}${resp.query_params}`
+  return dispatch => {
+  //  axios would normally be used, fetch variant placed for purposes of demonstration
+    axios.get(create_url('github_authorization'))
+      .then(json => {
+        // automatically redirecting the user to the github authorization link to authorize the app, will be redirected back to site after accepting
+        const resp = json.data
+        window.location = `${resp.url}${resp.query_params}`
+      })
+      .catch(error => {
+        dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
     })
-    .catch(error => {
-      dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
-  })
+  }
 }
-}
+
+export const linkTwitterAccount = () => {
+  // manually setting data object for sake of fetch display
+    setHeaders()
+  
+    return dispatch => {
+    //  axios would normally be used, fetch variant placed for purposes of demonstration
+      axios.get(create_url('twitter_authorization'))
+        .then(json => {
+          // automatically redirecting the user to the twitter authorization link to authorize the app, will be redirected back to site after accepting
+          const resp = json.data
+          window.location = `${resp.url}${resp.query_params}`
+        })
+        .catch(error => {
+          dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+      })
+    }
+  }
