@@ -142,27 +142,26 @@ export const authenticateUser = () => {
 }
 }
 
-// export const deleteUser = id => {
-// // setting authorization header ahead of axios request
-// setHeaders();
+export const deleteUser = id => {
+  // setting authorization header ahead of axios request
+  setHeaders();
 
-// return dispatch => {
-//   // updating load status while async action executes
-//   dispatch({ type: "LOADING_USER_INFO"})
+  return dispatch => {
+    // updating load status while async action executes
+    dispatch({ type: "LOADING_USER_INFO"})
 
-//   axios.delete(`${baseUrl}/users/${id}`)
-//     .then( json => {
-//       sessionStorage.removeItem('jwt') 
-//       sessionStorage.removeItem('preference_setting') 
-//       sessionStorage.removeItem('logged_in')
+    axios.delete(create_url(`users/${id}`))
+      .then( json => {
+        sessionStorage.removeItem('jwt') 
+        sessionStorage.removeItem('logged_in')
 
-//       dispatch({
-//         type: 'DELETE_USER',
-//       })
-//     })
-//   .catch(error => {console.log(error.message)})
-// }
-// }
+        dispatch({
+          type: 'DELETE_USER',
+        })
+      })
+    .catch(error => {console.log(error.message)})
+  }
+}
 
 // --------------- USER ACCOUNT ACTIONS ---------------
 

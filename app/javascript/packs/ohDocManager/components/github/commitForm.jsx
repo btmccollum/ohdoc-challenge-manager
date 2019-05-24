@@ -34,7 +34,6 @@ class CommitForm extends React.Component {
                 thoughts: "",
                 link: "",
             })
-        // add logic to submit submission request to backend
     }
 
     render() {
