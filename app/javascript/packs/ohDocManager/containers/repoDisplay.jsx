@@ -13,11 +13,11 @@ class RepoDisplay extends React.Component {
         if ( user ) {
             if (user.github_linked == true && user.twitter_linked == true) {
                 return (
-                        <> 
-                        <span>GitHub Account is Linked.</span>
-                        <span>Twitter Account is Linked.</span> 
-                        </>
-                        )
+                    <> 
+                    <span>GitHub Account is Linked.</span>
+                    <span>Twitter Account is Linked.</span> 
+                    </>
+                )
             } else if (user.github_linked == true && user.twitter_linked == false) {
                 return (
                     <> 
@@ -52,11 +52,6 @@ class RepoDisplay extends React.Component {
             }
         }
     }
-
-    // FOR TESTING PURPOSES ONLY
-    showGithub = () => {
-        console.log(this.state.user)
-    }
     
     render() {
         return (
@@ -78,7 +73,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  linkGithubAccount
+  linkGithubAccount,
+  linkTwitterAccount
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoDisplay);

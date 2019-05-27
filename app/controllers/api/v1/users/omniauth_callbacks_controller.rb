@@ -30,6 +30,7 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     end
 
     def twitter
+        binding.pry
     end
 
     def failure

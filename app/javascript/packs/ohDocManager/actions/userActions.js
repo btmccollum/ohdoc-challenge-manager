@@ -192,8 +192,8 @@ export const linkTwitterAccount = () => {
       axios.get(create_url('twitter_authorization'))
         .then(json => {
           // automatically redirecting the user to the twitter authorization link to authorize the app, will be redirected back to site after accepting
-          const resp = json.data
-          window.location = `${resp.url}${resp.query_params}`
+          const redirect_url = json.data
+          window.location = redirect_url
         })
         .catch(error => {
           dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })

@@ -33,9 +33,11 @@ gem 'devise', '~> 4.6', '>= 4.6.2'
 
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
 
-gem 'thin', '~> 1.7', '>= 1.7.2'
+gem 'thin'
 
 gem 'attr_encrypted', '~> 3.1'
+
+gem 'oauth'
 
 gem 'omniauth-oauth2', '~> 1.6'
 

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :submissions, only: %i[index create show update destroy]
       
       get 'github_authorization', to: "users#github_authorization"
+      get 'twitter_authorization', to: "users#twitter_authorization"
       get 'users/authorize', to: "users#authorize"
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     end
