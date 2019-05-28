@@ -261,6 +261,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  config.omniauth :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"], :provider_ignores_state => true
+  # config.omniauth :twitter, ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"], :provider_ignores_state => true
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -297,6 +300,5 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
-  config.omniauth :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"], :provider_ignores_state => true
-  config.omniauth :twitter, ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"], :provider_ignores_state => true
+ 
 end

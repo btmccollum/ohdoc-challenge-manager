@@ -39,6 +39,8 @@ gem 'attr_encrypted', '~> 3.1'
 
 gem 'oauth'
 
+gem 'omniauth'
+
 gem 'omniauth-oauth2', '~> 1.6'
 
 gem 'omniauth-twitter', '~> 1.4'

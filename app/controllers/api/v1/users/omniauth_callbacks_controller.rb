@@ -30,7 +30,30 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     end
 
     def twitter
+        # <ActionController::Parameters {"oauth_token"=>"IwxcxAAAAAAA-TjHAAABawArYwU", 
+        # "oauth_verifier"=>"mhmVZB3MIguABToNoa7NFMgv6z0WSvGx", "format"=>:json, 
+        # "controller"=>"api/v1/users/omniauth_callbacks", "action"=>"twitter"} permitted: false>
         binding.pry
+        user = User.find_by(state_token: params[:oauth_token])
+
+        if user 
+            consumer = OAuth::Consumer.new(
+                ENV['TWITTER_KEY'], 
+                ENV['TWITTER_SECRET'], 
+                site: "https://api.twitter.com", 
+                oauth_callback: ENV['TWITTER_RURI']
+            )
+
+            hash = { oauth_token: user.state_token, oauth_token_secret: session[:token_secret]}
+            request_token  = OAuth::RequestToken.from_hash(consumer, hash)
+            access_token = request_token.get_access_token
+            # For 3-legged authorization, flow oauth_verifier is passed as param in callback
+            # @access_token = @request_token.get_access_token(oauth_verifier: params[:oauth_verifier]) 
+            # @photos = @access_token.get('/photos.xml')
+
+        else
+            redirect_to 'http://localhost:3000', error: { message: 'Unauthorized user.' }
+        end
     end
 
     def failure
