@@ -6,6 +6,7 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
         user = User.find_by(state_token: params[:state])  
         
         if user
+            # GitHub uses OAuth2
             temp_url = Faraday.new(url: "https://github.com/login/oauth/access_token")
 
             auth_code_request = temp_url.post do |req|
@@ -14,29 +15,23 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
               req.params['code'] = params[:code]
             end
         
-            # calls are made with 
-            # Authorization: token OAUTH-TOKEN
-            # GET https://api.github.com/user
             user.update_from_omniauth(request.env["omniauth.auth"])
 
                 if user.save
-                    redirect_to 'http://localhost:3000'   
+                    redirect_to 'https://localhost:3000'   
                 else 
-                    redirect_to 'http://localhost:3000', error: { message: 'Unauthorized user.' }
+                    redirect_to 'https://localhost:3000', error: { message: 'Unauthorized user.' }
                 end
         else 
-            redirect_to 'http://localhost:3000', error: { message: 'Unauthorized user.' }
+            redirect_to 'https://localhost:3000', error: { message: 'Unauthorized user.' }
         end
     end
 
     def twitter
-        # <ActionController::Parameters {"oauth_token"=>"IwxcxAAAAAAA-TjHAAABawArYwU", 
-        # "oauth_verifier"=>"mhmVZB3MIguABToNoa7NFMgv6z0WSvGx", "format"=>:json, 
-        # "controller"=>"api/v1/users/omniauth_callbacks", "action"=>"twitter"} permitted: false>
-        binding.pry
         user = User.find_by(state_token: params[:oauth_token])
 
         if user 
+            # Twitter uses OAuth not OAuth2
             consumer = OAuth::Consumer.new(
                 ENV['TWITTER_KEY'], 
                 ENV['TWITTER_SECRET'], 
@@ -44,19 +39,22 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
                 oauth_callback: ENV['TWITTER_RURI']
             )
 
-            hash = { oauth_token: user.state_token, oauth_token_secret: session[:token_secret]}
+            hash = { oauth_token: user.state_token, oauth_token_secret: user.state_token_verify }
             request_token  = OAuth::RequestToken.from_hash(consumer, hash)
-            access_token = request_token.get_access_token
-            # For 3-legged authorization, flow oauth_verifier is passed as param in callback
-            # @access_token = @request_token.get_access_token(oauth_verifier: params[:oauth_verifier]) 
-            # @photos = @access_token.get('/photos.xml')
+            access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier]) 
+         
+            # need to save these and use them in the future potentially
+            user.twitter_token = access_token.params["oauth_token"]
+            user.twitter_token_secret = access_token.params["oauth_token_secret"]
+            user.save
 
+            redirect_to 'http://localhost:3000'  
         else
             redirect_to 'http://localhost:3000', error: { message: 'Unauthorized user.' }
         end
     end
 
     def failure
-        # binding.pry
+        redirect_to 'http://localhost:3000', error: { message: 'Oops! Something went wrong.' }, status: 500
     end
 end

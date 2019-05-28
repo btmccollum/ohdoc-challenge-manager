@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_210036) do
+ActiveRecord::Schema.define(version: 2019_05_28_211232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_05_28_210036) do
     t.string "uid"
     t.string "state_token"
     t.string "state_token_verify"
+    t.string "encrypted_twitter_token_secret"
+    t.string "encrypted_twitter_token_secret_iv"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

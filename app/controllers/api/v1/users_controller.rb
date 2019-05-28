@@ -59,8 +59,7 @@ class Api::V1::UsersController < ApplicationController
     request_token = request_token_step.token
     request_secret = request_token_step.secret
 
-    current_user.update(state_token: request_token)
-    binding.pry
+    current_user.update(state_token: request_token, state_token_verify: request_secret)
 
     # generate auth link user must visit to provide permission
     redirect_url = request_token_step.authorize_url(oauth_callback: ENV['TWITTER_RURI'])

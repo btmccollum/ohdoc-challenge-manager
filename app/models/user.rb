@@ -8,6 +8,7 @@ class User < ApplicationRecord
   # used to handle encryption upon persistance
   attr_encrypted_options.merge!(encode: true, encode_iv: true, encode_salt: true)
   attr_encrypted :twitter_token, key: ENV['TKEY']
+  attr_encrypted :twitter_token_secret, key: ENV['TKEY']
   attr_encrypted :github_token, key: ENV['GKEY']
 
   # validates :username, presence: true, uniqueness: true
