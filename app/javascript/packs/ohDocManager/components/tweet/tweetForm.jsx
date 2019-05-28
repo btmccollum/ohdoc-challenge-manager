@@ -7,7 +7,8 @@ import { bindActionCreators } from 'redux';
 
 class TweetForm extends React.Component {
     state = {
-        tweet: ""
+        tweet: "",
+        entryTitle: "",
     }
 
     handleOnChange = event => {
@@ -24,6 +25,7 @@ class TweetForm extends React.Component {
         this.props.createSubmission(this.state, "twitter")
         this.setState({
                 tweet: "",
+                entryTitle: "",
             })
     }
 

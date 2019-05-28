@@ -17,9 +17,20 @@ class Api::V1::SubmissionsController < ApplicationController
         user_submission.user_id = current_user.id
 
         if params[:service] == "twitter"
-            binding.pry
-      
-            # make Twitter call
+            client = Twitter::REST::Client.new do |config|
+                config.consumer_key        = ENV['TWITTER_KEY']
+                config.consumer_secret     = ENV['TWITTER_SECRET']
+                config.access_token        = current_user.twitter_token
+                config.access_token_secret = current_user.twitter_token_secret
+            end
+
+            user_submission.title = submission_params[:tweet]
+            user_submission.twitter = true 
+            user_submission.content = submission_params[:tweet]
+
+            # using Twitter gem update method to send update/status (tweet)
+            client.update(submission_params[:tweet])
+       
         elsif params[:service] == "github"
             # creating content markdown blurb to add to user's existing log md file on github
             content = "### #{submission_params[:entryTitle]}\n\n **Today's Progress:** #{submission_params[:progress]}\n\n **Thoughts:** #{submission_params[:thoughts]}\n\n **Link(s):** #{submission_params[:link]}\n "
@@ -51,11 +62,10 @@ class Api::V1::SubmissionsController < ApplicationController
             end
 
             # setting github specific data
+            user_submission.title = submission_params[:entryTitle]
             user_submission.github = true 
             user_submission.content = content
         end
-
-        user_submission.title = submission_params[:entryTitle]
 
         if user_submission.save
             submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
@@ -69,6 +79,6 @@ class Api::V1::SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:title, :twitter, :github, :content, :repoName, :filePath, :entryTitle, :progress, :thoughts, :link)
+        params.require(:submission).permit(:title, :twitter, :github, :content, :repoName, :filePath, :entryTitle, :progress, :thoughts, :link, :tweet)
     end
 end

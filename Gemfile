@@ -47,6 +47,8 @@ gem 'omniauth-twitter', '~> 1.4'
 
 gem 'omniauth-github', '~> 1.3'
 
+gem 'twitter'
+
 gem 'jwt', '~> 2.1'
 
 gem 'faraday', '~> 0.15.4'
