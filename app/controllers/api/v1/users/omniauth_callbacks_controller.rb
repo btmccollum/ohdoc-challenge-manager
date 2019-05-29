@@ -51,13 +51,13 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
             user.twitter_token_secret = access_token.params["oauth_token_secret"]
             user.save
 
-            redirect_to 'http://localhost:3000'  
+            redirect_to 'https://localhost:3000'  
         else
-            redirect_to 'http://localhost:3000', error: { message: 'Unauthorized user.' }
+            redirect_to 'https://localhost:3000', error: { message: 'Unauthorized user.' }
         end
     end
 
     def failure
-        redirect_to 'http://localhost:3000', error: { message: 'Oops! Something went wrong.' }, status: 500
+        redirect_to 'https://localhost:3000', error: { message: 'Oops! Something went wrong.' }, status: 500
     end
 end
