@@ -1,6 +1,6 @@
 class UserSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :username, :email
+  attributes :github_username, :github_repo_path, :github_repo_url, :twitter_username, :email
 
   attribute :github_linked do |object|
     !!object.encrypted_github_token

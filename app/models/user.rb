@@ -31,6 +31,7 @@ class User < ApplicationRecord
   end
 
   def update_from_omniauth(auth)
+    binding.pry
     self.provider = auth.provider
     self.uid = auth.id
     self.github_token = auth.credentials.token

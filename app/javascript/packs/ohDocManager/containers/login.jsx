@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter, Link } from 'react-router-dom';
 import { loginUser } from '../actions/userActions';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { clearErrors } from '../actions/errorActions';
+import { addError, clearErrors } from '../actions/errorActions';
 import cuid from 'cuid';
 
 class Login extends Component {
@@ -24,21 +24,26 @@ class Login extends Component {
   onSubmit = event => {
     event.preventDefault()
 
-    const user = this.state
-    this.props.loginUser(user, () => this.props.history.push('/'))
+    if (this.state.email != '' && this.state.password != '') {
+      const user = this.state
+      this.props.loginUser(user, () => this.props.history.push('/'))
+    } else {
+      this.props.clearErrors()
+      this.props.addError("All fields are required.")
+    }
   }
 
-  // handleErrors = () => {
-  //   if (this.props.errors) { 
-  //     return (
-  //       this.props.errors.map(error => <li key={cuid()}>{error}</li>)
-  //     )
-  //   }
-  // }
+  handleErrors = () => {
+    if (this.props.errors) { 
+      return (
+        this.props.errors.map(error => <li key={cuid()}>{error}</li>)
+      )
+    }
+  }
 
   componentWillUnmount() {
     if (this.props.errors.length > 0) {
-      clearErrors()
+      this.props.clearErrors()
     }
   }
 
@@ -52,7 +57,7 @@ class Login extends Component {
             <Col md={{ span: 8 }}>
               <Form onSubmit={this.onSubmit} className="login">
               <h1>OHDOC CM Login</h1>
-              {/* <ul>{this.handleErrors()}</ul> */}
+              <ul>{this.handleErrors()}</ul>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />
@@ -80,13 +85,14 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    errors: state.errors
+    errors: state.errors.errors
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loginUser,
-  clearErrors
+  clearErrors,
+  addError
 }, dispatch)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

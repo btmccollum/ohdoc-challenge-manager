@@ -79,6 +79,7 @@ export const loginUser = (user, callback) => {
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', json.data.jwt)
+        debugger;
         
         // determine if user has authorized github and/or twitter
         setOauthStatus(json)
@@ -90,7 +91,7 @@ export const loginUser = (user, callback) => {
             callback()
         })
         .catch(error => {
-            dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+            dispatch({ type: 'ADD_ERROR', message: error.response.data.error })
         })
   }
 }
