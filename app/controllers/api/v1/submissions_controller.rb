@@ -71,7 +71,6 @@ class Api::V1::SubmissionsController < ApplicationController
             submission_hash = SubmissionSerializer.new(user_submission).serializable_hash
             render json: { submission: submission_hash }, status: :ok
         else
-            binding.pry
             render json: { errors: user_submission.errors}, status: 422   
         end
     end

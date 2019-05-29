@@ -79,7 +79,6 @@ export const loginUser = (user, callback) => {
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', json.data.jwt)
-        debugger;
         
         // determine if user has authorized github and/or twitter
         setOauthStatus(json)
@@ -175,6 +174,7 @@ export const linkGithubAccount = () => {
     axios.get(create_url('github_authorization'))
       .then(json => {
         // automatically redirecting the user to the github authorization link to authorize the app, will be redirected back to site after accepting
+        debugger;
         const resp = json.data
         window.location = `${resp.url}${resp.query_params}`
       })

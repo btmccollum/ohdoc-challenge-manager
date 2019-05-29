@@ -2,7 +2,6 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user, only: %i[create]
 
   def authorize
-    
     user_hash = UserSerializer.new(current_user).serializable_hash
     jwt = current_user.generate_jwt
     render json: { user: user_hash, jwt: jwt }, status: :ok
@@ -27,9 +26,9 @@ class Api::V1::UsersController < ApplicationController
 
   # a user must be redirected to GitHub's access page to provide authorization to app
   def github_authorization
-    current_user.generate_state_token
-   
     # state token is for our use only, state token ensures client is the same on both ends when it comes back to oauth callback
+    current_user.generate_state_token
+
     redirect_info = {
       query_params: {
         client_id: ENV['GITHUB_KEY'],

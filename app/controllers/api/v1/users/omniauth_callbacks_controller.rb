@@ -43,6 +43,9 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
             request_token  = OAuth::RequestToken.from_hash(consumer, hash)
             access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier]) 
          
+            user.twitter_username = access_token.params["screen_name"]
+            # user.twitter_url = "https://twitter.com/#{user.twitter_username}"
+
             # need to save these and use them in the future potentially
             user.twitter_token = access_token.params["oauth_token"]
             user.twitter_token_secret = access_token.params["oauth_token_secret"]
