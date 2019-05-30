@@ -1,11 +1,16 @@
 /* // // @import "bootstrap-sprockets";
 // @import "bootstrap"; */
 
-.container-fluid {
+/* .container-fluid {
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
 
 .container {
   color: red !important;
+} */
+
+.tweetBox {
+  border: 1px solid black;
+  background: blue;
 }

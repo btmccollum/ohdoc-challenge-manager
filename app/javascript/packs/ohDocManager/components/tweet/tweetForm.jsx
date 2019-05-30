@@ -25,7 +25,7 @@ class TweetForm extends React.Component {
         event.preventDefault()
         const tweetLength = this.state.tweet.length
 
-        if (tweetLength > 140) {
+        if (tweetLength > 280) {
             this.props.addError("Tweet cannot exceed 140 characters.")
         } else {
             this.props.createSubmission(this.state, "twitter")
@@ -48,7 +48,7 @@ class TweetForm extends React.Component {
     }
 
     displayRemainingCharacters = () => {
-        return (140 - this.state.tweet.length)
+        return (280 - this.state.tweet.length)
     }
 
     handleErrors = () => {
@@ -70,9 +70,9 @@ class TweetForm extends React.Component {
         const user = this.props.user.currentUser.attributes
 
         return (
-            <Container>
+            <Container className="tweetContainer">
                 <Row>
-                    <Col md={6}>
+                    <Col md={6} className="tweetBox">
                         <h1>Send your Tweet</h1>
 
                         <h4>{this.handleDisplayName()}</h4>

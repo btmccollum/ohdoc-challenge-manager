@@ -12,6 +12,7 @@ import LandingPage from './components/landingPage';
 import Signup from './containers/signup'
 import { authenticateUser, logoutUser } from './actions/userActions';
 import Login from './containers/login'
+import Profile from './containers/profile'
 
 // const App = (props) => (
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
                 }
               }/>   
         <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
-        {/* <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/> */}
+        <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
         <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
         <Route path='/logout' render={ props => { 
           this.props.logoutUser();

@@ -3,20 +3,21 @@ import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from '
 import { NavLink } from 'react-router-dom';
 
 class NavigationBar extends React.Component {
-    
-
     renderOptions = () => {
         status = this.props.loggedIn
         
         if (status == 'true') {
             return (
-                
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
                             <NavLink to="/submissions">Submissions</NavLink>
                         </Nav>
 
                         <Nav>
+                            <NavLink to="/profile">
+                                Profile
+                            </NavLink>
+                            
                             <NavLink to="/logout">
                                 Logout
                             </NavLink>
@@ -25,7 +26,6 @@ class NavigationBar extends React.Component {
             )
         } else {
             return (
-                
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav>
                             <NavLink to="/login">

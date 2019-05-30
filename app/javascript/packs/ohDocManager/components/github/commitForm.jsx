@@ -3,6 +3,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { createSubmission } from '../../actions/submissionActions'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { addError, clearErrors } from '../../actions/errorActions';
+import cuid from 'cuid';
 
 class CommitForm extends React.Component {
     state = {
@@ -36,14 +38,43 @@ class CommitForm extends React.Component {
             })
     }
 
+    handleDisplayName = () => {
+        const user = this.props.user.currentUser
+    
+        if (Object.keys(user).length !== 0) {
+            return `${user.attributes.github_username} - Account Linked`
+        } else {
+            return "No Account Linked."
+        }
+    }
+
+    displayRemainingCharacters = () => {
+        return (140 - this.state.tweet.length)
+    }
+
+    handleErrors = () => {
+        if (this.props.errors) { 
+          return (
+            this.props.errors.map(error => <li key={cuid()}>{error}</li>)
+          )
+        }
+    }
+    
+    componentWillUnmount() {
+        if (this.props.errors.length > 0) {
+            this.props.clearErrors()
+        }
+    }
     render() {
         const { repoName, filePath, entryTitle, progress, thoughts, link } = this.state
 
         return (
-            <Container>
+            <Container className="gitContainer">
                 <Row>
-                    <Col md={8}>
+                    <Col md={8} className="gitBox">
                         <h1>Add Your GitHub Entry</h1>
+
+                        <h4>{this.handleDisplayName()}</h4>
                         <Form onSubmit={this.handleOnSubmit}>
                             <Form.Row>
                                 <Form.Label>Repo Name:</Form.Label>
@@ -87,7 +118,7 @@ class CommitForm extends React.Component {
 
                             <Form.Row>
                                 <Col>
-                                    <Button variant="secondary" type="submit">
+                                    <Button variant="secondary" type="submit" className="submitFormButton">
                                         Submit
                                     </Button>
                                 </Col>
@@ -100,8 +131,17 @@ class CommitForm extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+        errors: state.errors.errors
+    }
+}
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-    createSubmission
+    createSubmission,
+    addError,
+    clearErrors,
   }, dispatch)
 
-export default connect(null, mapDispatchToProps)(CommitForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CommitForm)

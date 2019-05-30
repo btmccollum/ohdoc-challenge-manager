@@ -14,4 +14,27 @@
  *= require_self
  */
 
- 
+
+.tweetContainer {
+    padding: 1.5%;
+}
+
+.tweetBox {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.gitContainer {
+    padding: 1.5%;
+}       
+
+.gitBox {
+   border: 1px solid black;
+   border-radius: 5px;
+   padding: 15px;
+}
+
+.submitFormButton {
+    margin-top: 10px;
+}

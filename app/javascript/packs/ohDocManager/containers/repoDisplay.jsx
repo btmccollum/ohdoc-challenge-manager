@@ -15,6 +15,7 @@ class RepoDisplay extends React.Component {
                 return (
                     <> 
                     <span>GitHub Account is Linked.</span>
+                    <br/>
                     <span>Twitter Account is Linked.</span> 
                     </>
                 )
@@ -44,6 +45,7 @@ class RepoDisplay extends React.Component {
                     <Button onClick={() => this.props.linkGithubAccount()}>
                         Link GitHub Account
                     </Button>
+                    <br/>
                     <Button onClick={() => this.props.linkTwitterAccount()}>
                         Link Twitter Account
                     </Button>
