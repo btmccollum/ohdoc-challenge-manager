@@ -38,3 +38,32 @@
 .submitFormButton {
     margin-top: 10px;
 }
+
+.boldTitle {
+    font-weight: bold;
+}
+
+// ---- GETTING STARTED MODAL ---
+
+.modal-header {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.modal-body {
+    padding-top: 0 !important;
+}
+
+// ---- PROFILE CONTAINER ----
+
+.profileHeader{
+    margin-top: 10px;
+}
+
+.profileRow {
+    margin-bottom: 10px;
+}
+
+.profileSection {
+    font-weight: bold;
+}
