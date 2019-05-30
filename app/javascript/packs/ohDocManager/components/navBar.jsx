@@ -43,15 +43,12 @@ class NavigationBar extends React.Component {
 
     render() {
         return (
-            <Container fluid>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">ohdoc!</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/">ohdoc!</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                    {this.renderOptions()}
-                    
-                </Navbar>
-            </Container>
+                {this.renderOptions()}
+            </Navbar>
         )
     }
 }

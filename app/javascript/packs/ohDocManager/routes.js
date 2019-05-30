@@ -13,12 +13,14 @@ import Signup from './containers/signup'
 import { authenticateUser, logoutUser } from './actions/userActions';
 import Login from './containers/login'
 import Profile from './containers/profile'
+import NavigationBar from './components/navBar'
 
 // const App = (props) => (
 class App extends Component {
   render() {
     return (
       <Router>
+        <NavigationBar loggedIn={loggedIn()} />
         <Route exact path ="/" component={ 
                 () => {
                   if (loggedIn()) {

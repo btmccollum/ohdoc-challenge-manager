@@ -16,7 +16,6 @@ class LandingPage extends React.Component {
     if (loggedIn() === true) {
       return (
         <>
-        <RepoDisplay />
         <TweetForm />
         <CommitForm />
         </>
@@ -31,7 +30,6 @@ class LandingPage extends React.Component {
   render() {
     return(
       <div>
-        <NavigationBar loggedIn={loggedIn()} />
 
         {this.loadContent()}
 
