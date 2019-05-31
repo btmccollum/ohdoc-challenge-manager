@@ -5,12 +5,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
+import { linkTwitterAccount } from '../../actions/userActions'
 
 
 class TweetForm extends React.Component {
     state = {
         tweet: "",
         entryTitle: "",
+    }
+
+    handleOnClick = event => {
+        event.preventDefault()
+
+        this.props.linkTwitterAccount()
     }
 
     handleOnChange = event => {
@@ -26,7 +33,7 @@ class TweetForm extends React.Component {
         const tweetLength = this.state.tweet.length
 
         if (tweetLength > 280) {
-            this.props.addError("Tweet cannot exceed 140 characters.")
+            this.props.addError("Tweet cannot exceed 280 characters.")
         } else {
             this.props.createSubmission(this.state, "twitter")
             this.setState({
@@ -49,6 +56,35 @@ class TweetForm extends React.Component {
 
     displayRemainingCharacters = () => {
         return (280 - this.state.tweet.length)
+    }
+
+    displayTweetForm = () => {
+        const tweet = this.state.tweet
+        const user = this.props.user.currentUser.attributes
+        
+        if (user) {
+            if (user.twitter_linked) {
+                return (
+                    <Form onSubmit={this.handleOnSubmit}>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Control as="textarea" name="tweet" value={tweet} onChange={this.handleOnChange} rows="3" />
+                            <Form.Label>{this.displayRemainingCharacters()} characters remaining.</Form.Label>
+                        </Form.Group>
+
+                        <ul>{this.handleErrors()}</ul>
+                        <Button variant="secondary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                )
+            } else {
+                return (
+                    <p>
+                        You must link your Twitter account to use this feature. Click <a href="#" onClick={this.handleOnClick}>here</a> to start! 
+                    </p>
+                )
+            }
+        }
     }
 
     handleErrors = () => {
@@ -76,17 +112,8 @@ class TweetForm extends React.Component {
                         <h1>Send your Tweet</h1>
 
                         <h4>{this.handleDisplayName()}</h4>
-                        <Form onSubmit={this.handleOnSubmit}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" name="tweet" value={tweet} onChange={this.handleOnChange} rows="3" />
-                                <Form.Label>{this.displayRemainingCharacters()} characters remaining.</Form.Label>
-                            </Form.Group>
-
-                            <ul>{this.handleErrors()}</ul>
-                            <Button variant="secondary" type="submit">
-                                Submit
-                            </Button>
-                        </Form>
+                            
+                        { this.displayTweetForm() }
                     </Col>
                 </Row>
             </Container>         
@@ -105,6 +132,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     createSubmission,
     addError,
     clearErrors,
+    linkTwitterAccount,
   }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TweetForm)

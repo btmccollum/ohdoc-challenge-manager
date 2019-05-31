@@ -48,10 +48,6 @@ class CommitForm extends React.Component {
         }
     }
 
-    displayRemainingCharacters = () => {
-        return (140 - this.state.tweet.length)
-    }
-
     handleErrors = () => {
         if (this.props.errors) { 
           return (

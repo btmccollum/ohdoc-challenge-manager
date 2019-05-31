@@ -36,21 +36,16 @@ class LandingPage extends React.Component {
   };
 
   showGithub = () => {
-    console.log()
+  
   }
-
-  // handleWelcome = () => {
-  //   if ()
-  // }
 
   loadContent = () => {
     if (loggedIn() === true) {
       return (
         <>
-        <Button onClick={this.showModal}>Click Me</Button>
-        <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
-        <TweetForm />
-        <CommitForm />
+          <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
+          <TweetForm />
+          <CommitForm />
         </>
       )
     } else {

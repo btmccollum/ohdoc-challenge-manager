@@ -3,12 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import RepoDisplay from './repoDisplay'
-import NavigationBar from '../components/navBar'
 
 class Profile extends React.Component {
     handleOnClick = event => {
         event.preventDefault()
-        console.log("hi!")
     }
 
     render() {
