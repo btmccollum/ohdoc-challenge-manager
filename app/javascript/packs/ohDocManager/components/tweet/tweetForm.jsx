@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
 import { linkTwitterAccount } from '../../actions/userActions'
+import SubmittedModal from '../../containers/submittedModal'
 
 
 class TweetForm extends React.Component {
@@ -13,6 +14,15 @@ class TweetForm extends React.Component {
         tweet: "",
         entryTitle: "",
     }
+
+    // modals used to display successful submission display from SubmittedModal
+    showModal = () => {
+        this.setState({ show: true });
+    };
+    
+    hideModal = () => {
+        this.setState({ show: false });
+    };
 
     handleOnClick = event => {
         event.preventDefault()
@@ -36,6 +46,10 @@ class TweetForm extends React.Component {
             this.props.addError("Tweet cannot exceed 280 characters.")
         } else {
             this.props.createSubmission(this.state, "twitter")
+            // submittedModal is displayed after a tweet is submitted successfully 
+            this.showModal()
+
+            // clear out local state and errors
             this.setState({
                 tweet: "",
                 entryTitle: "",
@@ -116,6 +130,8 @@ class TweetForm extends React.Component {
                         { this.displayTweetForm() }
                     </Col>
                 </Row>
+
+                <SubmittedModal show={this.state.show} onHide={this.hideModal} />
             </Container>         
         )
     }
