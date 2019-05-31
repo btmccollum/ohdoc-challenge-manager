@@ -22,7 +22,10 @@ class Api::V1::UsersController < ApplicationController
   def update
     if params[:id].to_i == current_user.id
       # update user based on user_params passed in and create new user_hash to pass back
+      url = user_params[:github_repo_url]
+
       current_user.update(user_params)
+
       user_hash = UserSerializer.new(current_user).serializable_hash
       jwt = current_user.generate_jwt
 

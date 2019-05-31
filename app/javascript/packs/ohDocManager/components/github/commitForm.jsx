@@ -50,14 +50,15 @@ class CommitForm extends React.Component {
         event.preventDefault()
 
         const userId = this.props.user.currentUser.id
-        const repoPath = this.state.filePath
+        const repoUrl = this.state.filePath
+        // creating file path to persist, must match the api format which differs from the standard url path
+        const repoFilePath = repoUrl.replace(/.*(?=100-days-of-code)/g, "").replace("blob/master","contents")
 
         const data = {
-            github_repo_url: repoPath,
+            github_repo_url: repoUrl,
+            github_repo_path: repoFilePath,
             id: userId,
         }
-
-        debugger;
 
         this.props.updateUser(data)
     }

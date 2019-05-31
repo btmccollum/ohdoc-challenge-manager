@@ -35,7 +35,7 @@ class Api::V1::SubmissionsController < ApplicationController
             # creating content markdown blurb to add to user's existing log md file on github
             content = "### #{submission_params[:entryTitle]}\n\n **Today's Progress:** #{submission_params[:progress]}\n\n **Thoughts:** #{submission_params[:thoughts]}\n\n **Link(s):** #{submission_params[:link]}\n "
 
-            api = Faraday.new('https://api.github.com/repos/btmccollum/test_repo/contents/log.md')
+            api = Faraday.new("https://api.github.com/repos/#{current_user.github_username}/#{current_user.github_repo_path}")
   
             # get request for repo details to obtain repo sha
             repo_req = api.get do |req|
