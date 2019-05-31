@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
+import { linkGithubAccount } from '../../actions/userActions'
 
 class CommitForm extends React.Component {
     state = {
@@ -14,6 +15,12 @@ class CommitForm extends React.Component {
         progress: "",
         thoughts: "",
         link: "",
+    }
+
+    handleOnClick = event => {
+        event.preventDefault()
+
+        this.props.linkGithubAccount()
     }
     
     handleOnChange = event => {
@@ -48,6 +55,73 @@ class CommitForm extends React.Component {
         }
     }
 
+    displayCommitForm = () => {
+        const { repoName, filePath, entryTitle, progress, thoughts, link } = this.state
+        const user = this.props.user.currentUser.attributes
+        
+        if (user) {
+            if (user.github_linked) {
+                return (
+                    <Form onSubmit={this.handleOnSubmit}>
+                        {/* <Form.Row>
+                            <Form.Label>Repo Name:</Form.Label>
+                            <Form.Control placeholder="100-Days-of-Code" name="repoName" value={repoName} onChange={this.handleOnChange} />
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Form.Label>Log File Path:</Form.Label>
+                            <Form.Control placeholder="100-days-of-code/log.md" name="filePath" value={filePath} onChange={this.handleOnChange} />
+                        </Form.Row> */}
+
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Log Entry Title</Form.Label>
+                                <Form.Control placeholder="Day #: Month, Day, Year" name="entryTitle" value={entryTitle} onChange={this.handleOnChange} />
+                            </Col>
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Col>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
+                                    <Form.Label>Today's Progress</Form.Label>
+                                    <Form.Control as="textarea" rows="3" name="progress" value={progress} onChange={this.handleOnChange} />
+                                </Form.Group>
+                            </Col>
+
+                            <Col>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
+                                    <Form.Label>Thoughts</Form.Label>
+                                    <Form.Control as="textarea" rows="3" name="thoughts" value={thoughts} onChange={this.handleOnChange} />
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                        
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Link(s) to Work</Form.Label>
+                                <Form.Control placeholder="Insert URL here" name="link" value={link} onChange={this.handleOnChange} />
+                            </Col>
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Col>
+                                <Button variant="secondary" type="submit" className="submitFormButton">
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Form.Row>
+                    </Form>
+                )
+            } else {
+                return (
+                    <p>
+                        You must link your GitHub account to use this feature. Click <a href="#" onClick={this.handleOnClick}>here</a> to start! 
+                    </p>
+                )
+            }
+        }
+    }
+
     handleErrors = () => {
         if (this.props.errors) { 
           return (
@@ -71,55 +145,8 @@ class CommitForm extends React.Component {
                         <h1>Add Your GitHub Entry</h1>
 
                         <h4>{this.handleDisplayName()}</h4>
-                        <Form onSubmit={this.handleOnSubmit}>
-                            <Form.Row>
-                                <Form.Label>Repo Name:</Form.Label>
-                                <Form.Control placeholder="100-Days-of-Code" name="repoName" value={repoName} onChange={this.handleOnChange} />
-                            </Form.Row>
-
-                            <Form.Row>
-                                <Form.Label>Log File Path:</Form.Label>
-                                <Form.Control placeholder="100-days-of-code/log.md" name="filePath" value={filePath} onChange={this.handleOnChange} />
-                            </Form.Row>
-
-                            <Form.Row>
-                                <Col>
-                                    <Form.Label>Log Entry Title</Form.Label>
-                                    <Form.Control placeholder="Day #: Month, Day, Year" name="entryTitle" value={entryTitle} onChange={this.handleOnChange} />
-                                </Col>
-                            </Form.Row>
-
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>Today's Progress</Form.Label>
-                                        <Form.Control as="textarea" rows="3" name="progress" value={progress} onChange={this.handleOnChange} />
-                                    </Form.Group>
-                                </Col>
-
-                                <Col>
-                                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>Thoughts</Form.Label>
-                                        <Form.Control as="textarea" rows="3" name="thoughts" value={thoughts} onChange={this.handleOnChange} />
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            
-                            <Form.Row>
-                                <Col>
-                                    <Form.Label>Link(s) to Work</Form.Label>
-                                    <Form.Control placeholder="Insert URL here" name="link" value={link} onChange={this.handleOnChange} />
-                                </Col>
-                            </Form.Row>
-
-                            <Form.Row>
-                                <Col>
-                                    <Button variant="secondary" type="submit" className="submitFormButton">
-                                        Submit
-                                    </Button>
-                                </Col>
-                            </Form.Row>
-                        </Form>
+                        
+                        { this.displayCommitForm() }
                     </Col>
                 </Row>
             </Container>         
@@ -138,6 +165,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     createSubmission,
     addError,
     clearErrors,
+    linkGithubAccount,
   }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommitForm)
