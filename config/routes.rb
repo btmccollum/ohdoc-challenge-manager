@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { registrations: 'api/v1/users',
                                         omniauth_callbacks: 'api/v1/users/omniauth_callbacks',
                                       }
-      resources :users, only: %i[create destroy]
+      resources :users, only: %i[create update destroy]
       resources :sessions, only: %i[create destroy]
       resources :submissions, only: %i[index create show update destroy]
       

@@ -19,6 +19,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update
+    if params[:id].to_i == current_user.id
+      # update user based on user_params passed in and create new user_hash to pass back
+      current_user.update(user_params)
+      user_hash = UserSerializer.new(current_user).serializable_hash
+      jwt = current_user.generate_jwt
+
+      render json: {user: user_hash, jwt: jwt}, status: :ok
+    else
+      render json: { error: "Unauthorized access" }, status: 422
+    end
+  end
+
   def destroy
     current_user.destroy
     render json: { message: "Successful" }, status: 422
@@ -69,6 +82,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :twitter_token, :github_token)
+    params.require(:user).permit(:twitter_username, :github_username, :email, :password, :password_confirmation, :twitter_token, :github_token, :github_repo_url, :github_repo_path,)
   end
 end

@@ -5,17 +5,32 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
-import { linkGithubAccount } from '../../actions/userActions'
+import { linkGithubAccount, updateUser } from '../../actions/userActions'
 
 class CommitForm extends React.Component {
-    state = {
-        repoName: "",
-        filePath: "",
-        entryTitle: "",
-        progress: "",
-        thoughts: "",
-        link: "",
+    constructor(props) {
+        super(props);
+        this.state = {
+            repoName: "",
+            filePath: "",
+            entryTitle: "",
+            progress: "",
+            thoughts: "",
+            link: "",
+        }
+    
+        // This binding is necessary to make `this` work in the callback
+        this.handleNextButton = this.handleNextButton.bind(this);
     }
+
+    // state = {
+    //     repoName: "",
+    //     filePath: "",
+    //     entryTitle: "",
+    //     progress: "",
+    //     thoughts: "",
+    //     link: "",
+    // }
 
     handleOnClick = event => {
         event.preventDefault()
@@ -29,6 +44,22 @@ class CommitForm extends React.Component {
     
         state[field] = event.target.value
         this.setState(state)
+    }
+
+    handleNextButton = event => {
+        event.preventDefault()
+
+        const userId = this.props.user.currentUser.id
+        const repoPath = this.state.filePath
+
+        const data = {
+            github_repo_url: repoPath,
+            id: userId,
+        }
+
+        debugger;
+
+        this.props.updateUser(data)
     }
     
     handleOnSubmit = event => {
@@ -60,19 +91,32 @@ class CommitForm extends React.Component {
         const user = this.props.user.currentUser.attributes
         
         if (user) {
-            if (user.github_linked) {
+            if (user.github_linked && user.github_repo_url == null) {
+                return (
+                    <Container>
+                        <Row>
+                            <p>Please paste the full url to your repo's log file to begin.</p> 
+                            <p>This can be changed in your profile at a later point.</p>
+                        </Row>
+                        <Row>
+                            <Form onSubmit={this.handleNextButton}>
+                                <Form.Row>
+                                    <Form.Label>Log File Path:</Form.Label>
+                                    <Form.Control placeholder="https://github.com/username/100-days-of-code/blob/master/log.md" name="filePath" value={filePath} onChange={this.handleOnChange} />
+                                </Form.Row>
+
+                                <Form.Row>
+                                    <Button variant="secondary" type="submit" className="submitFormButton">
+                                        Next
+                                    </Button>
+                                </Form.Row>
+                            </Form>
+                        </Row>
+                    </Container>
+                )
+            } else if (user.github_linked) {
                 return (
                     <Form onSubmit={this.handleOnSubmit}>
-                        {/* <Form.Row>
-                            <Form.Label>Repo Name:</Form.Label>
-                            <Form.Control placeholder="100-Days-of-Code" name="repoName" value={repoName} onChange={this.handleOnChange} />
-                        </Form.Row>
-
-                        <Form.Row>
-                            <Form.Label>Log File Path:</Form.Label>
-                            <Form.Control placeholder="100-days-of-code/log.md" name="filePath" value={filePath} onChange={this.handleOnChange} />
-                        </Form.Row> */}
-
                         <Form.Row>
                             <Col>
                                 <Form.Label>Log Entry Title</Form.Label>
@@ -166,6 +210,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     addError,
     clearErrors,
     linkGithubAccount,
+    updateUser,
   }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommitForm)

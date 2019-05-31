@@ -139,7 +139,32 @@ export const authenticateUser = () => {
 
         dispatch(getSubmissions())
     })
+  }
 }
+
+export const updateUser = (user) => {
+  const data = { user: user, }
+
+  // setting authorization header ahead of axios request
+  setHeaders();
+
+  return dispatch => {
+
+  // updating load status while async action executes
+  dispatch({ type: "LOADING_USER_INFO"})
+
+  axios.patch(create_url(`users/${data.user.id}`), data)
+    .then( json => {
+      // new JWT token created with user update, resetting both the token and logged_in status
+      sessionStorage.setItem('logged_in', 'true')
+      sessionStorage.setItem('jwt', json.data.jwt)
+
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: json.data.user.data
+      })
+    })
+  }
 }
 
 export const deleteUser = id => {
