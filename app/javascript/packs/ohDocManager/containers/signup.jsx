@@ -30,7 +30,7 @@ class Signup extends Component {
 
     handleErrors = () => {
       // loading form errors from rails API if present
-      if (this.props.errors) { 
+      if (Object.keys(this.props.errors).length != 0) { 
         return (
           this.props.errors.map(error => <li key={cuid()}>{error}</li>)
         )

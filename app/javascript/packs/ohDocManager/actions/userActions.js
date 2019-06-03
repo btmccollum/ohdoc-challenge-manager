@@ -57,7 +57,7 @@ export const signupUser = (user, callback) => {
                 payload: json.action.payload.user.data
             });
 
-            callback()
+            callback
         })
         .catch(error => {
             dispatch({ type: 'SHOW_ERROR', message: error.response })
@@ -90,6 +90,7 @@ export const loginUser = (user, callback) => {
             callback()
         })
         .catch(error => {
+            debugger;
             dispatch({ type: 'ADD_ERROR', message: error.response.data.error })
         })
   }
@@ -108,7 +109,7 @@ export const logoutUser = () => {
     // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
 
-    axios.post(`/logout`)
+    axios.post('/logout')
       .then(resp => {
         dispatch({
           type: 'LOGOUT_USER',

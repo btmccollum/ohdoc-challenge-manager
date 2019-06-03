@@ -61,8 +61,12 @@ class TweetForm extends React.Component {
     handleDisplayName = () => {
         const user = this.props.user.currentUser
     
-        if (Object.keys(user).length !== 0) {
-            return `@${user.attributes.twitter_username} - Account Linked`
+        if (Object.keys(user).length != 0 && user.attributes.twitter_username != null) {
+            const twitter_url = `https://twitter.com/${user.attributes.twitter_username}`
+            
+            return (
+                <p>Twitter Account: <a href={twitter_url} target="_blank">@{user.attributes.twitter_username}</a> - Account Linked</p>
+            )
         } else {
             return "No Account Linked."
         }
@@ -121,11 +125,11 @@ class TweetForm extends React.Component {
 
         return (
             <Container className="tweetContainer">
-                <Row>
-                    <Col md={6} className="tweetBox">
+                <Row className="justify-content-md-center">
+                    <Col md={8} className="tweetBox">
                         <h1>Send your Tweet</h1>
 
-                        <h4>{this.handleDisplayName()}</h4>
+                        { this.handleDisplayName() }
                             
                         { this.displayTweetForm() }
                     </Col>

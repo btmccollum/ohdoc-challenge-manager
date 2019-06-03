@@ -22,16 +22,7 @@ class CommitForm extends React.Component {
         // This binding is necessary to make `this` work in the callback
         this.handleNextButton = this.handleNextButton.bind(this);
     }
-
-    // state = {
-    //     repoName: "",
-    //     filePath: "",
-    //     entryTitle: "",
-    //     progress: "",
-    //     thoughts: "",
-    //     link: "",
-    // }
-
+    
     handleOnClick = event => {
         event.preventDefault()
 
@@ -80,8 +71,19 @@ class CommitForm extends React.Component {
     handleDisplayName = () => {
         const user = this.props.user.currentUser
     
-        if (Object.keys(user).length !== 0) {
-            return `${user.attributes.github_username} - Account Linked`
+        if (Object.keys(user).length != 0 && user.attributes.github_username != null) {
+            if (user.attributes.github_repo_url != null) {
+                return (
+                    <ul>
+                        <li><span className="boldTitle"> </span>GitHub Repo: <a href={user.attributes.github_repo_url} target="_blank">{user.attributes.github_repo_url}</a></li>
+                        <li><span className="boldTitle"></span>GitHub Account: {user.attributes.github_username} - Linked</li>
+                    </ul>
+                )
+            } else {
+                return (
+                    <p><span className="boldTitle">{user.attributes.github_username}</span> - Account Linked</p>
+                )
+            }
         } else {
             return "No Account Linked."
         }
@@ -185,11 +187,11 @@ class CommitForm extends React.Component {
 
         return (
             <Container className="gitContainer">
-                <Row>
+                <Row className="justify-content-md-center">
                     <Col md={8} className="gitBox">
                         <h1>Add Your GitHub Entry</h1>
 
-                        <h4>{this.handleDisplayName()}</h4>
+                        {this.handleDisplayName()}
                         
                         { this.displayCommitForm() }
                     </Col>

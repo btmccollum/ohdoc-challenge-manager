@@ -4,9 +4,9 @@ import TweetForm from './tweet/tweetForm'
 import CommitForm from './github/commitForm'
 import RepoDisplay from '../containers/repoDisplay'
 import Login from '../containers/login'
-import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import GettingStartedModal from '../containers/gettingStartedModal'
+import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 
 class LandingPage extends React.Component {
   state = {
@@ -42,11 +42,13 @@ class LandingPage extends React.Component {
   loadContent = () => {
     if (loggedIn() === true) {
       return (
-        <>
-          <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
-          <TweetForm />
-          <CommitForm />
-        </>
+        <Container>
+          <Row className="justify-content-md-center">
+            <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
+            <TweetForm />
+            <CommitForm />
+          </Row>
+        </Container>
       )
     } else {
       return (

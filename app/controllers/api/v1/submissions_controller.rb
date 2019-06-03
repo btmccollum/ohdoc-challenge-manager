@@ -16,6 +16,8 @@ class Api::V1::SubmissionsController < ApplicationController
         user_submission = Submission.new
         user_submission.user_id = current_user.id
 
+        # using twitter gem to interface with Twitter API and handle OAuth process
+        # need to move this out to a twitter service in the future
         if params[:service] == "twitter"
             client = Twitter::REST::Client.new do |config|
                 config.consumer_key        = ENV['TWITTER_KEY']
