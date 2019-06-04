@@ -52,11 +52,11 @@ class Login extends Component {
 
     return (
       <React.Fragment>
-        <Container className="h-100">
-          <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
-            <Col md={{ span: 8 }}>
+        <Container className="loginContainer">
+          <Row className="justify-content-md-center">
+            <Col md={{ span: 6 }} className="loginBox">
               <Form onSubmit={this.onSubmit} className="login">
-              <h1>OHDOC CM Login</h1>
+              <h1>ohdoc!</h1>
               <ul>{this.handleErrors()}</ul>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
@@ -72,8 +72,6 @@ class Login extends Component {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">Submit</Button>
-              <br/>
-              <p><Link to='/signup'>Sign Up</Link></p>
               </Form>
             </Col>
           </Row>

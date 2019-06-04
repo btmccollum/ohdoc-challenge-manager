@@ -47,14 +47,13 @@ class Signup extends Component {
       const { email, password, password_confirmation } = this.state;
       // const { errors } = this.props;
       
-      // rendering a signup form for user display
       return (
         <React.Fragment>
-          <Container className="h-100">
-            <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
-              <Col md={{ span: 8 }}>
+          <Container className="signupContainer">
+            <Row className="justify-content-md-center">
+              <Col md={{ span: 6 }} className="signupBox">
                 <Form onSubmit={this.handleOnSubmit} className="signup">
-                <h1>Get started with OHDOC CM</h1>
+                <h1>ohdoc!</h1>
                 <ul>{this.handleErrors()}</ul>
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -75,8 +74,6 @@ class Signup extends Component {
                   </Form.Group>
 
                   <Button variant="primary" type="submit">Submit</Button>
-
-                  <p><Link to='/login'>Log In</Link></p>
                 </Form>
               </Col>
             </Row>
