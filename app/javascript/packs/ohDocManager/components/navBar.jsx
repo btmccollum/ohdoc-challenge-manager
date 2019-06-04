@@ -10,15 +10,17 @@ class NavigationBar extends React.Component {
             return (
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <NavLink to="/submissions">Submissions</NavLink>
+                            {/* <NavLink to="/submissions" className="nav-link" role="button">
+                                Submissions
+                            </NavLink> */}
                         </Nav>
 
                         <Nav>
-                            <NavLink to="/profile">
+                            <NavLink to="/profile" className="nav-link" role="button">
                                 Profile
                             </NavLink>
-                            
-                            <NavLink to="/logout">
+                        
+                            <NavLink to="/logout" className="nav-link" role="button">
                                 Logout
                             </NavLink>
                         </Nav>
@@ -28,11 +30,11 @@ class NavigationBar extends React.Component {
             return (
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav>
-                            <NavLink to="/login">
+                            <NavLink to="/login" className="nav-link" role="button">
                                 Log In
                             </NavLink>
 
-                            <NavLink to="/signup">
+                            <NavLink to="/signup" className="nav-link" role="button">
                                 Sign Up
                             </NavLink>
                         </Nav>
@@ -43,8 +45,10 @@ class NavigationBar extends React.Component {
 
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="/">ohdoc!</Navbar.Brand>
+            <Navbar collapseOnSelect expand="lg" className="topNav">
+                <NavLink to="/" className="navbar-brand"> 
+                    ohdoc!
+                </NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                 {this.renderOptions()}

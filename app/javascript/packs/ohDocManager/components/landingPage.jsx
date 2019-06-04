@@ -1,8 +1,6 @@
 import React from 'react';
-import NavigationBar from './navBar'
 import TweetForm from './tweet/tweetForm'
 import CommitForm from './github/commitForm'
-import RepoDisplay from '../containers/repoDisplay'
 import Login from '../containers/login'
 import { connect } from 'react-redux'
 import GettingStartedModal from '../containers/gettingStartedModal'

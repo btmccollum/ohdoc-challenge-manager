@@ -13,14 +13,14 @@ class Profile extends React.Component {
         const user = this.props.user.currentUser.attributes
 
         return (
-            <Container className="d-flex">
+            <Container className="profileContainer">
                 <Row className="justify-content-md-center w-100">
-                    <Col md={8} className="profileBox align-self-center">
+                    <Col md={{ span: 6 }} className="profileBox align-self-center">
                         <h1 className="profileHeader">ohdoc!</h1>
                         <h2>Account Settings:</h2>
                         <Row className="profileRow">
                             <Col>
-                            <span className="profileSection">Email:</span> {user ? user.email : "Not Available."}
+                                <span className="profileSection">Email:</span> {user ? user.email : "Not Available."}
                             </Col>
                         </Row>
                         <Row className="profileRow">

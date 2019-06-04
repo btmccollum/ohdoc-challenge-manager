@@ -58,6 +58,7 @@ class CommitForm extends React.Component {
         event.preventDefault()
 
         this.props.createSubmission(this.state, "github")
+        this.showModal()
         this.setState({
                 repoName: "",
                 filePath: "",
@@ -67,6 +68,14 @@ class CommitForm extends React.Component {
                 link: "",
             })
     }
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+    
+    hideModal = () => {
+        this.setState({ show: false });
+    };
 
     handleDisplayName = () => {
         const user = this.props.user.currentUser
@@ -188,7 +197,7 @@ class CommitForm extends React.Component {
         return (
             <Container className="gitContainer">
                 <Row className="justify-content-md-center">
-                    <Col md={8} className="gitBox">
+                    <Col md={{ span: 8 }} className="gitBox">
                         <h1>Add Your GitHub Entry</h1>
 
                         {this.handleDisplayName()}

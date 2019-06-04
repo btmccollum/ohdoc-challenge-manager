@@ -18,11 +18,22 @@
 html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
     height: 100%;
     background: rgb(232, 244, 97);
+    display: inline;
 }
 
 #ohdoc-challenge-manager {
     background: rgb(232, 244, 97);
     height: 100%;
+}
+
+.topNav {
+    background: rgb(43, 40, 40);
+    // position: relative !important;
+    margin: 0 !important;
+}
+
+a.navbar-brand, a.nav-link {
+    color: white !important;
 }
 
 // --- GENERAL USE CLASSES ---
@@ -43,7 +54,7 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 
 .loginBox{
     background: white;
-    border: 1px solid black;
+    border: 1px solid rgb(43, 40, 40);
     border-radius: 5px;
     box-shadow: 4.75px 6.5px;
     padding: 15px;
@@ -55,7 +66,7 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 
 .signupBox{
     background: white;
-    border: 1px solid black;
+    border: 1px solid rgb(43, 40, 40);
     border-radius: 5px;
     box-shadow: 4.75px 6.5px;
     padding: 15px;
@@ -64,7 +75,7 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 // --- TWITTER CONTAINER CONTENTS ---
 
 .tweetContainer {
-    padding: 1.5%;
+    padding-top: 10%;
 }
 
 .tweetBox {
@@ -78,12 +89,12 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 // --- GITHUB CONTAINER CONTENTS ---
 
 .gitContainer {
-    padding: 1.5%;
+    padding-top: 5%;
 }
 
 .gitBox {
     background: white;  
-    border: 1px solid black;
+    border: 1px solid rgb(43, 40, 40);
     border-radius: 5px;
     box-shadow: 4.75px 6.5px;
     padding: 15px;
@@ -103,15 +114,16 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 // ---- PROFILE CONTAINER CONTENTS ----
 
 .profileContainer {
-    padding: 1.5%;
+    padding-top: 20% !important;
+    // height: 100%;
 }       
 
 .profileBox {
     background: white;
-    border: 1px solid black;
+    border: 1px solid rgb(43, 40, 40);
     border-radius: 5px;
     box-shadow: 4.75px 6.5px;
-    padding: 15px;
+    // padding: 15px;
 }
 
 .profileHeader{

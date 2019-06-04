@@ -126,7 +126,7 @@ class TweetForm extends React.Component {
         return (
             <Container className="tweetContainer">
                 <Row className="justify-content-md-center">
-                    <Col md={8} className="tweetBox">
+                    <Col md={{ span: 8 }} className="tweetBox">
                         <h1>Send your Tweet</h1>
 
                         { this.handleDisplayName() }
