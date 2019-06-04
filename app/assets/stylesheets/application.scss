@@ -16,13 +16,26 @@
 
 
 html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
-    height: 100%
+    height: 100%;
+    background: rgb(232, 244, 97);
 }
 
 #ohdoc-challenge-manager {
     background: rgb(232, 244, 97);
     height: 100%;
 }
+
+// --- GENERAL USE CLASSES ---
+
+.submitFormButton {
+    margin-top: 10px;
+}
+
+.boldTitle {
+    font-weight: bold;
+}
+
+// --- TWITTER CONTAINER CONTENTS ---
 
 .tweetContainer {
     padding: 1.5%;
@@ -36,9 +49,11 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
     padding: 15px;
 }
 
+// --- GITHUB CONTAINER CONTENTS ---
+
 .gitContainer {
     padding: 1.5%;
-}       
+}
 
 .gitBox {
     background: white;  
@@ -46,14 +61,6 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
     border-radius: 5px;
     box-shadow: 4.75px 6.5px;
     padding: 15px;
-}
-
-.submitFormButton {
-    margin-top: 10px;
-}
-
-.boldTitle {
-    font-weight: bold;
 }
 
 // ---- GETTING STARTED MODAL ---
@@ -67,7 +74,19 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
     padding-top: 0 !important;
 }
 
-// ---- PROFILE CONTAINER ----
+// ---- PROFILE CONTAINER CONTENTS ----
+
+.profileContainer {
+    padding: 1.5%;
+}       
+
+.profileBox {
+    background: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 4.75px 6.5px;
+    padding: 15px;
+}
 
 .profileHeader{
     margin-top: 10px;

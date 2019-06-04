@@ -13,32 +13,34 @@ class Profile extends React.Component {
         const user = this.props.user.currentUser.attributes
 
         return (
-            <>
-            <Container>
-                <h1 className="profileHeader">ohdoc!</h1>
-                <h2>Account Settings:</h2>
-                <Row className="profileRow">
-                    <Col>
-                    <span className="profileSection">Email:</span> {user ? user.email : "Not Available."}
-                    </Col>
-                </Row>
-                <Row className="profileRow">
-                    <Col>
-                        <span className="profileSection">Authorized Applications:</span>
-                        <RepoDisplay />
-                    </Col>
-                </Row>
+            <Container className="d-flex">
+                <Row className="justify-content-md-center w-100">
+                    <Col md={8} className="profileBox align-self-center">
+                        <h1 className="profileHeader">ohdoc!</h1>
+                        <h2>Account Settings:</h2>
+                        <Row className="profileRow">
+                            <Col>
+                            <span className="profileSection">Email:</span> {user ? user.email : "Not Available."}
+                            </Col>
+                        </Row>
+                        <Row className="profileRow">
+                            <Col>
+                                <span className="profileSection">Authorized Applications:</span>
+                                <RepoDisplay />
+                            </Col>
+                        </Row>
 
-                <Row className="profileRow">
-                    <Col>
-                        <span className="profileSection">Account Actions:</span>
-                        <p>
-                            Delete Account - Click <a href="#" onClick={this.handleOnClick}>here</a> to delete your account. This cannot be undone.
-                        </p>
+                        <Row className="profileRow">
+                            <Col>
+                                <span className="profileSection">Account Actions:</span>
+                                <p>
+                                    Delete Account - Click <a href="#" onClick={this.handleOnClick}>here</a> to delete your account. This cannot be undone.
+                                </p>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
-            </>
         )
     }
 }
