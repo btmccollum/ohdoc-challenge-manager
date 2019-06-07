@@ -90,8 +90,9 @@ export const loginUser = (user, callback) => {
             callback()
         })
         .catch(error => {
-            debugger;
-            dispatch({ type: 'ADD_ERROR', message: error.response.data.error })
+            dispatch({ 
+              type: 'ADD_ERROR', 
+              payload: error.response.data.error })
         })
   }
 }
@@ -204,7 +205,10 @@ export const linkGithubAccount = () => {
         window.location = `${resp.url}${resp.query_params}`
       })
       .catch(error => {
-        dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+        dispatch({ 
+          type: 'SHOW_ERROR', 
+          payload: error.response.data.error 
+        })
     })
   }
 }
@@ -222,7 +226,10 @@ export const linkTwitterAccount = () => {
           window.location = redirect_url
         })
         .catch(error => {
-          dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+          dispatch({ 
+            type: 'SHOW_ERROR', 
+            payload: error.response.data.error 
+          })
       })
     }
   }

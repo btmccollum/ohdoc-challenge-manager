@@ -135,7 +135,7 @@ class TweetForm extends React.Component {
                     </Col>
                 </Row>
 
-                <SubmittedModal show={this.state.show} onHide={this.hideModal} />
+                <SubmittedModal show={this.state.show} onHide={this.hideModal} content="Tweet" />
             </Container>         
         )
     }

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
 import { linkGithubAccount, updateUser } from '../../actions/userActions'
+import SubmittedModal from '../../containers/submittedModal'
 
 class CommitForm extends React.Component {
     constructor(props) {
@@ -205,6 +206,8 @@ class CommitForm extends React.Component {
                         { this.displayCommitForm() }
                     </Col>
                 </Row>
+
+                <SubmittedModal show={this.state.show} onHide={this.hideModal} content="GitHub Commit" />
             </Container>         
         )
     }
