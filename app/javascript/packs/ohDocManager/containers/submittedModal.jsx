@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 class SubmittedModal extends React.Component {
     render() {
@@ -18,9 +17,6 @@ class SubmittedModal extends React.Component {
                     <p className="boldTitle">{this.props.content} successfully posted!</p>
                 </Modal.Title>
                 </Modal.Header>
-                {/* <Modal.Body>
-                    <p>Check it out here: link to go here</p>
-                </Modal.Body> */}
             </Modal>
         )
     }

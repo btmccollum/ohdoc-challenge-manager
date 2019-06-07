@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 class GettingStartedModal extends React.Component {
     render() {
@@ -23,7 +22,6 @@ class GettingStartedModal extends React.Component {
                     <p>I hope you'll find as much use for this tool as I did. Goodluck with the challenge!</p>
                     <span className="boldTitle">Requirements:</span>
                     <ul>
-                    
                         <li>A <a href="https://www.github.com">GitHub</a> account</li>
                         <li>A fork of the <a href="https://github.com/kallaway/100-days-of-code">100 Days of Code</a> repo</li>
                         <li>A <a href="https://www.twitter.com">Twitter</a> account</li>

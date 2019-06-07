@@ -207,7 +207,7 @@ class CommitForm extends React.Component {
                     </Col>
                 </Row>
 
-                <SubmittedModal show={this.state.show} onHide={this.hideModal} content="GitHub Commit" />
+                <SubmittedModal show={this.state.show} onHide={this.hideModal} content="GitHub commit" />
             </Container>         
         )
     }

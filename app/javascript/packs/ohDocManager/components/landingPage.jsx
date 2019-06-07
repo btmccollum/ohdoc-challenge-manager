@@ -4,7 +4,7 @@ import CommitForm from './github/commitForm'
 import Login from '../containers/login'
 import { connect } from 'react-redux'
 import GettingStartedModal from '../containers/gettingStartedModal'
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 class LandingPage extends React.Component {
   state = {

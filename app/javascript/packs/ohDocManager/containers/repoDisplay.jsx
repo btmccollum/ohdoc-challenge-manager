@@ -5,7 +5,6 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { linkGithubAccount, linkTwitterAccount } from '../actions/userActions'
 
 class RepoDisplay extends React.Component {
-
     // handle logic for OAuth links to be displayed for user
     accountStatusBox = () => {
         const user = this.props.user.currentUser.attributes
