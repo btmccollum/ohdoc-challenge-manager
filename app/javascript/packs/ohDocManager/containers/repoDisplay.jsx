@@ -13,19 +13,21 @@ class RepoDisplay extends React.Component {
             if (user.github_linked == true && user.twitter_linked == true) {
                 return (
                     <> 
-                    <span>GitHub Account is Linked.</span>
-                    <br/>
-                    <span>Twitter Account is Linked.</span> 
+                    <p>GitHub Account is Linked.</p>
+                    
+                    <p>Twitter Account is Linked.</p> 
                     </>
                 )
             } else if (user.github_linked == true && user.twitter_linked == false) {
                 return (
                     <> 
-                    <span>GitHub Account is Linked.</span>
-                    <br/>
-                    <Button onClick={() => this.props.linkTwitterAccount()}>
-                        Link Twitter Account
-                    </Button>
+                    <p>GitHub Account is Linked.</p>
+                    
+                    <p>
+                        <Button onClick={() => this.props.linkTwitterAccount()}>
+                            Link Twitter Account
+                        </Button>
+                    </p>
                     </>
                 )
             } else if (user.github_linked == false && user.twitter_linked == true) {
@@ -34,20 +36,23 @@ class RepoDisplay extends React.Component {
                     <Button onClick={() => this.props.linkGithubAccount()}>
                             Link GitHub Account
                     </Button>
-                    <br/>
-                    <span>Twitter Account is Linked.</span> 
+                    
+                    <p>Twitter Account is Linked.</p> 
                     </>
                 )
             } else {
                 return (
                     <>
-                    <Button onClick={() => this.props.linkGithubAccount()}>
-                        Link GitHub Account
-                    </Button>
-                    <br/>
-                    <Button onClick={() => this.props.linkTwitterAccount()}>
-                        Link Twitter Account
-                    </Button>
+                    <p>
+                        <Button onClick={() => this.props.linkGithubAccount()}>
+                            Link GitHub Account
+                        </Button>
+                    </p>
+                    <p>
+                        <Button onClick={() => this.props.linkTwitterAccount()}>
+                            Link Twitter Account
+                        </Button>
+                    </p>
                     </>
                 )
             }
