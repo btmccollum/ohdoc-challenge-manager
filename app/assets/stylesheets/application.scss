@@ -131,6 +131,7 @@ a.navbar-brand, a.nav-link {
 }
 
 .profileRow {
+    // padding: 5px
     margin-bottom: 10px;
 }
 
@@ -140,4 +141,8 @@ a.navbar-brand, a.nav-link {
 
 .form-group {
     width: 100%;
+}
+
+.profSettings {
+    border: 1px solid black;
 }

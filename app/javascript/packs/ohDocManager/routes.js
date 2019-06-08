@@ -17,6 +17,10 @@ import NavigationBar from './components/navBar'
 
 // const App = (props) => (
 class App extends Component {
+  componentWillMount() {
+    loggedIn()
+  }
+  
   render() {
     return (
       <Router>
@@ -48,7 +52,6 @@ const mapStateToProps = state => {
   }
 }
 
-const githubStatus = () => !!sessionStorage['github']
 const loggedIn = () => !!sessionStorage['logged_in'];
 
 export default connect(mapStateToProps, { logoutUser, authenticateUser })(App);

@@ -18,7 +18,7 @@ export default function userReducer(state = { currentUser: {}, github_linked: fa
       return { ...state, currentUser: user, github_linked: user.attributes.github_linked, twitter_linked: user.attributes.twitter_linked, loading: false }
 
     case 'DELETE_USER':
-      return { ...state, currentUser: {}, github_linked: user.attributes.github_linked, twitter_linked: user.attributes.twitter_linked, loading: false}
+      return { ...state, currentUser: {}, github_linked: false, twitter_linked: false, loading: false}
 
     default: 
       return state;

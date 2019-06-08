@@ -36,8 +36,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    current_user.destroy
-    render json: { message: "Successful" }, status: 422
+    atest = current_user.destroy
+    render json: { message: "Successful" }, status: 202
   end
 
   # a user must be redirected to GitHub's access page to provide authorization to app

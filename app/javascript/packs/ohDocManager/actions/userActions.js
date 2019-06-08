@@ -51,16 +51,19 @@ export const signupUser = (user, callback) => {
 
             // determine if user has authorized github and/or twitter
             setOauthStatus(json.data)
-
+      
             dispatch({
                 type: 'SET_USER',
-                payload: json.action.payload.user.data
+                payload: json
             });
 
-            callback
+            callback()
         })
         .catch(error => {
-            dispatch({ type: 'SHOW_ERROR', message: error.response })
+            dispatch({ 
+              type: 'ADD_ERROR', 
+              payload: error.response.data.error 
+            })
         })
     }
 }
@@ -92,7 +95,7 @@ export const loginUser = (user, callback) => {
         .catch(error => {
             dispatch({ 
               type: 'ADD_ERROR', 
-              payload: error.response.data.error })
+              payload: error })
         })
   }
 }
@@ -169,7 +172,7 @@ export const updateUser = (user) => {
   }
 }
 
-export const deleteUser = id => {
+export const deleteUser = (id, callback) => {
   // setting authorization header ahead of axios request
   setHeaders();
 
@@ -181,10 +184,13 @@ export const deleteUser = id => {
       .then( json => {
         sessionStorage.removeItem('jwt') 
         sessionStorage.removeItem('logged_in')
+        debugger;
 
         dispatch({
           type: 'DELETE_USER',
         })
+
+        callback()
       })
     .catch(error => {console.log(error.message)})
   }

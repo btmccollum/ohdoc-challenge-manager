@@ -1,7 +1,6 @@
 function errorsReducer(state = { errors: [] }, action) {
     switch(action.type) {
         case "ADD_ERROR":
-            debugger;
             return { ...state, errors: [...state.errors, action.payload] }
 
         case "SHOW_ERROR":
