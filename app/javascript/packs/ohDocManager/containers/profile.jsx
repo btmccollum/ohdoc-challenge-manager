@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Row, Col, Form, Button, Link } from 'react-bootstrap'
 import RepoDisplay from './repoDisplay'
-import { deleteUser } from '../actions/userActions'
+import { updateUser, deleteUser } from '../actions/userActions'
 
 class Profile extends React.Component {
     constructor() {
@@ -11,6 +11,14 @@ class Profile extends React.Component {
         this.state = {
             filePath: "",
         }
+
+        this.handleOnChange = this.handleOnChange.bind(this)
+    }
+
+    handleOnChange = event => {
+        this.setState({
+            filePath: event.target.value
+        }, console.log(this.state))
     }
 
     handleOnClick = event => {
@@ -19,6 +27,19 @@ class Profile extends React.Component {
 
     handleOnSubmit = event => {
         event.preventDefault()
+   
+        const userId = this.props.user.currentUser.id
+        const repoUrl = this.state.filePath
+        // creating file path to persist, must match the api format which differs from the standard url path
+        const repoFilePath = repoUrl.replace(/.*(?=100-days-of-code)/g, "").replace("blob/master","contents")
+
+        const data = {
+            github_repo_url: repoUrl,
+            github_repo_path: repoFilePath,
+            id: userId,
+        }
+        
+        this.props.updateUser(data)
     }
 
     handleGitUrlDisplay = () => {
@@ -26,7 +47,7 @@ class Profile extends React.Component {
         if (user) {
             if (user.github_repo_url !== null) {
                 return (
-                    <Form.Control defaultValue={user.github_repo_url} />
+                    <Form.Control onChange={this.handleOnChange} value={this.state.filePath} name="filePath" placeholder={user.github_repo_url} />
                 )
             } else {
                 return (
@@ -112,7 +133,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({
     // linkGithubAccount,
     // linkTwitterAccount,
-    deleteUser
+    updateUser,
+    deleteUser,
   }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

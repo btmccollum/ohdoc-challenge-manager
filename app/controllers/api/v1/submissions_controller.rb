@@ -44,7 +44,7 @@ class Api::V1::SubmissionsController < ApplicationController
                 req.headers['User-Agent'] = 'OHDOC Challenge Manager'
                 req.headers['Authorization'] = "token #{current_user.github_token}"
             end
-
+            
             repo_json = JSON.parse(repo_req.body)
             repo_sha = repo_json['sha'] 
 

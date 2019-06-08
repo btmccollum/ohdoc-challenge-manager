@@ -184,7 +184,6 @@ export const deleteUser = (id, callback) => {
       .then( json => {
         sessionStorage.removeItem('jwt') 
         sessionStorage.removeItem('logged_in')
-        debugger;
 
         dispatch({
           type: 'DELETE_USER',
