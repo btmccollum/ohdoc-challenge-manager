@@ -13,10 +13,10 @@ class Api::V1::SessionsController < ApplicationController
         jwt_token = user.generate_jwt
         render json: { user: user_hash, jwt: jwt_token }, status: :ok
       else
-        render json: { error: "Invalid password." }, status: 404
+        render json: { errors: ["Invalid password."] }, status: 400
       end
     else
-      render json: { error: "Invalid e-mail." }, status: 404
+      render json: { error: ["Invalid e-mail."] }, status: 404
     end
   end
 

@@ -24,7 +24,7 @@ class Login extends Component {
   onSubmit = event => {
     event.preventDefault()
 
-    if (this.state.email != '' && this.state.password != '') {
+    if (this.state.email !== '' && this.state.password !== '') {
       const user = this.state
       this.props.loginUser(user, () => this.props.history.push('/'))
     } else {
@@ -34,7 +34,8 @@ class Login extends Component {
   }
 
   handleErrors = () => {
-    if (this.props.errors) { 
+    if (this.props.errors.length > 0) { 
+      setTimeout(this.props.clearErrors, 5000)
       return (
         this.props.errors.map(error => <li key={cuid()}>{error}</li>)
       )

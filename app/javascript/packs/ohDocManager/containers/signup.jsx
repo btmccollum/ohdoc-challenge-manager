@@ -29,8 +29,8 @@ class Signup extends Component {
     }
 
     handleErrors = () => {
-      // loading form errors from rails API if present
-      if (Object.keys(this.props.errors).length != 0) { 
+      if (this.props.errors.length > 0) { 
+        setTimeout(this.props.clearErrors, 5000)
         return (
           this.props.errors.map(error => <li key={cuid()}>{error}</li>)
         )
@@ -39,13 +39,12 @@ class Signup extends Component {
 
     componentWillUnmount() {
       if (this.props.errors.length > 0) {
-        clearErrors()
+        this.props.clearErrors()
       }
     }
   
     render() {
       const { email, password, password_confirmation } = this.state;
-      // const { errors } = this.props;
       
       return (
         <React.Fragment>
@@ -89,4 +88,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { signupUser })(Signup));
+export default withRouter(connect(mapStateToProps, { signupUser, clearErrors })(Signup));

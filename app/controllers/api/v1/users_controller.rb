@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
       jwt = user.generate_jwt
       render json: { user: user_hash, jwt: jwt }, status: :ok
     else
-      render json: { errors: user.errors}, status: 422    
+      render json: { errors: user.errors.full_messages }, status: 400   
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
 
       render json: {user: user_hash, jwt: jwt}, status: :ok
     else
-      render json: { error: "Unauthorized access" }, status: 422
+      render json: { error: ["Unauthorized access"] }, status: 422
     end
   end
 

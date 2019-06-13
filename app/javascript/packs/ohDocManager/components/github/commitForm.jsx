@@ -201,7 +201,7 @@ class CommitForm extends React.Component {
                     <Col md={{ span: 8 }} className="gitBox">
                         <h1>Add Your GitHub Entry</h1>
 
-                        {this.handleDisplayName()}
+                        { this.handleDisplayName() }
                         
                         { this.displayCommitForm() }
                     </Col>

@@ -1,7 +1,7 @@
 function errorsReducer(state = { errors: [] }, action) {
     switch(action.type) {
         case "ADD_ERROR":
-            return { ...state, errors: [...state.errors, action.payload] }
+            return { ...state, errors: [...action.payload] }
 
         case "SHOW_ERROR":
             return { ...state, errors: [action.payload] }

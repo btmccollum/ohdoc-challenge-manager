@@ -62,7 +62,7 @@ export const signupUser = (user, callback) => {
         .catch(error => {
             dispatch({ 
               type: 'ADD_ERROR', 
-              payload: error.response.data.error 
+              payload: error.response.data.errors 
             })
         })
     }
@@ -95,7 +95,7 @@ export const loginUser = (user, callback) => {
         .catch(error => {
             dispatch({ 
               type: 'ADD_ERROR', 
-              payload: error })
+              payload: error.response.data.errors })
         })
   }
 }
