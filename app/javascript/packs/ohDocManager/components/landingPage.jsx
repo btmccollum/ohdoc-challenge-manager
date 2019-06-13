@@ -42,9 +42,9 @@ class LandingPage extends React.Component {
       return (
         <Container>
           <Row className="justify-content-md-center">
-            <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
             <TweetForm />
             <CommitForm />
+            <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
           </Row>
         </Container>
       )

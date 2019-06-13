@@ -89,7 +89,6 @@ class TweetForm extends React.Component {
                             <Form.Label>{this.displayRemainingCharacters()} characters remaining.</Form.Label>
                         </Form.Group>
 
-                        {/* <ul>{this.handleErrors()}</ul> */}
                         <Button variant="secondary" type="submit">
                             Submit
                         </Button>
