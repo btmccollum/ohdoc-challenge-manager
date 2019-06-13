@@ -70,7 +70,7 @@ class Profile extends React.Component {
                     <Col md={{ span: 7 }} className="profileBox align-self-center">
                         <h1 className="profileHeader">ohdoc!</h1>
                         <h2>Account Settings:</h2>
-                        <Form onSubmit={this.handleOnSubmit}>
+                        <Form onSubmit={this.handleOnSubmit} className="profileForm">
                             <Form.Row>
                                 <Form.Group controlId="formPlaintextEmail">
                                     <Form.Label className="boldTitle">
@@ -87,6 +87,8 @@ class Profile extends React.Component {
                                     </Form.Label>
                                     
                                     {this.handleGitUrlDisplay()}
+
+                                    <p class="repoWarning">*IMPORTANT: This program will ONLY work with a fork of the 100-days-of-code repo! </p>
                                 </Form.Group>
                             </Form.Row>
 
@@ -94,13 +96,6 @@ class Profile extends React.Component {
                                 <Button variant="primary" type="submit" className="submitFormButton">Save</Button>
                             </Form.Row>
                         </Form>
-
-
-                        {/* <Row className="profileRow">
-                            <Col>
-                                <span className="profileSection">Email:</span> {user ? user.email : "Not Available."}
-                            </Col>
-                        </Row> */}
 
                         <Row className="profileRow">
                             <Col>
