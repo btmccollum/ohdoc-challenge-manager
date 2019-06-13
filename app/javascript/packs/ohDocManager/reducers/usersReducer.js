@@ -6,7 +6,7 @@ export default function userReducer(state = { currentUser: {}, github_linked: fa
       return { ...state, loading: true }
 
     case 'SET_USER':
-      return { ...state, currentUser: action.payload.current, github_linked: user.attributes.github_linked, twitter_linked: user.attributes.twitter_linked, loading: false }
+      return { ...state, currentUser: action.payload, github_linked: user.attributes.github_linked, twitter_linked: user.attributes.twitter_linked, loading: false }
 
     case 'LOGOUT_USER':
       return { ...state, currentUser: action.payload, github_linked: user.attributes.github_linked, twitter_linked: user.attributes.twitter_linked, loading: false }

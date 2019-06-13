@@ -60,8 +60,10 @@ class TweetForm extends React.Component {
 
     handleDisplayName = () => {
         const user = this.props.user.currentUser
-    
-        if (Object.keys(user).length != 0 && user.attributes.twitter_username != null) {
+
+        if (!user) return
+        
+        if (user.attributes && user.attributes.twitter_username != null) {
             const twitter_url = `https://twitter.com/${user.attributes.twitter_username}`
             
             return (

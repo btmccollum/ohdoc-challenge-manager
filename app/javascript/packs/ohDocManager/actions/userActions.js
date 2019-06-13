@@ -17,21 +17,6 @@ const setHeaders = (option) => {
   }
 }
 
-// sets Oauth linked status for github and/or twitter for app logic display options, will be replaced by passing the same info from backend
-const setOauthStatus = json => {
-    if (json.github == true && json.twitter == true) {
-        sessionStorage.setItem('githubLinked', true)
-        sessionStorage.setItem('twitterLinked', true)
-    } else if (json.github == true && json.twitter == false) {
-        return sessionStorage.setItem('githubLinked', false)
-    } else if (json.github == false && json.twitter == true) {
-        return sessionStorage.setItem('twitterLinked', false)
-    } else {
-        sessionStorage.setItem('githubLinked', false)
-        sessionStorage.setItem('twitterLinked', false)
-    }
-}
-
 // --------------- USER STATE ACTIONS ---------------
 
 export const signupUser = (user, callback) => {
@@ -48,13 +33,10 @@ export const signupUser = (user, callback) => {
         .then(json => {
             sessionStorage.setItem('logged_in', 'true')
             sessionStorage.setItem('jwt', json.data.jwt)
-
-            // determine if user has authorized github and/or twitter
-            setOauthStatus(json.data)
       
             dispatch({
                 type: 'SET_USER',
-                payload: json
+                payload: json.data.user.data
             });
 
             callback()
@@ -82,9 +64,6 @@ export const loginUser = (user, callback) => {
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', json.data.jwt)
-        
-        // determine if user has authorized github and/or twitter
-        setOauthStatus(json)
 
         dispatch({
             type: 'AUTHENTICATE_USER',

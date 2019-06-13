@@ -80,8 +80,10 @@ class CommitForm extends React.Component {
 
     handleDisplayName = () => {
         const user = this.props.user.currentUser
+
+        if (!user) return
     
-        if (Object.keys(user).length != 0 && user.attributes.github_username != null) {
+        if (user.attributes && user.attributes.github_username != null) {
             if (user.attributes.github_repo_url != null) {
                 return (
                     <ul>
