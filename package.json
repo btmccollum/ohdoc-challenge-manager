@@ -26,6 +26,7 @@
     "react-redux": "^7.0.3",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
@@ -38,8 +39,6 @@
     "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
-    "build": "cd client && yarn && yarn run build && cd ..",
-    "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn run build && yarn run deploy && echo 'Client built!'"
+   "postinstall": "cd client && yarn install"
   }
 }
