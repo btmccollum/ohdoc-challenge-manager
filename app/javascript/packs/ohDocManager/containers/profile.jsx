@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Container, Row, Col, Form, Button, Link } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import RepoDisplay from './repoDisplay'
 import { updateUser, deleteUser } from '../actions/userActions'
 
@@ -88,7 +88,7 @@ class Profile extends React.Component {
                                     
                                     {this.handleGitUrlDisplay()}
 
-                                    <p class="repoWarning">*IMPORTANT: This program will ONLY work with a fork of the 100-days-of-code repo! </p>
+                                    <p className="repoWarning">*IMPORTANT: This program will ONLY work with a fork of the 100-days-of-code repo!</p>
                                 </Form.Group>
                             </Form.Row>
 
@@ -126,8 +126,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    // linkGithubAccount,
-    // linkTwitterAccount,
     updateUser,
     deleteUser,
   }, dispatch)
