@@ -1,5 +1,10 @@
 {
   "name": "ohdoc-challenge-manager",
+  "description": "An application for managing your #100 Days of Code submissions.",
+  "version": "0.1.0",
+  "engines": {
+    "node": "11.9.0"
+  },
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
