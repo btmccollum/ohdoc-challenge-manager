@@ -39,6 +39,9 @@
     "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
-   "postinstall": "cd client && yarn install"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
