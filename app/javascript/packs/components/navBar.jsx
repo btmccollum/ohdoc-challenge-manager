@@ -9,6 +9,8 @@ class NavigationBar extends React.Component {
         if (status == 'true') {
             return (
                     <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                        </Nav>
                         <Nav>
                             <NavLink to="/profile" className="nav-link" role="button">
                                 Profile

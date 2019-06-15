@@ -1,1 +1,17 @@
-OHDOC Manager is a tool to allow you to conveniently handle a tweet and github log submission in the same spot at the same time. 
+The ohdoc challenge mananger is now deployed on Heroku! Check it out here: http://ohdoc-manager.herokuapp.com/ 
+
+Ohdoc! allows you to conveniently post your #100DaysOfCode tweets and github log commits all from a single page web app! Requires a Twitter and GitHub account to be linked before you're able to make use of it. 
+
+## Deployed On:
+* Heroku
+
+## Built with:
+* React
+* Redux
+* Ruby on Rails
+* Webpack
+* Bootstrap
+* Postgres
+
+## Authors
+* [Brad McCollum](https://github.com/btmccollum)
