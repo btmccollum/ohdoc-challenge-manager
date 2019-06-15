@@ -6,31 +6,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-  crossorigin="anonymous" />
-
-     <%= stylesheet_link_tag    'application', media: 'all' %> 
-     <%= javascript_include_tag 'application'  %>  
-     <!-- <%= javascript_pack_tag 'ohDocManager/index' %>  -->
-     <!-- <%= stylesheet_pack_tag 'ohDocManager/assets/stylesheets/app' %> -->
-
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <%= stylesheet_pack_tag 'bootstrap' %>
     
   </head>
 
-  <body> 
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    
+  <body>     
     <%= yield %>
-    <%= javascript_pack_tag 'ohDocManager/index' %>
-    <!-- <%= stylesheet_pack_tag 'ohDocManager/assets/stylesheets/app' %> -->
+
+    <%= javascript_pack_tag 'index' %>
   </body>
 </html>
