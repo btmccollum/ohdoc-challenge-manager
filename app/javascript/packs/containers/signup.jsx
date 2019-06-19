@@ -47,37 +47,35 @@ class Signup extends Component {
       const { email, password, password_confirmation } = this.state;
       
       return (
-        <React.Fragment>
-          <Container className="signupContainer">
-            <Row className="justify-content-md-center">
-              <Col md={{ span: 6 }} className="signupBox">
-                <Form onSubmit={this.handleOnSubmit} className="signup">
-                <h1>ohdoc!</h1>
-                <ul>{this.handleErrors()}</ul>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange.bind(this)} />
-                    <Form.Text className="text-muted">
-                      We'll never share your email with anyone else.
-                    </Form.Text>
-                  </Form.Group>
+        <Container className="signupContainer">
+          <Row className="justify-content-md-center frontPageRow">
+            <Col md={{ span: 6 }} className="signupBox">
+              <Form onSubmit={this.handleOnSubmit} className="signup">
+              <h1>ohdoc!</h1>
+              <ul>{this.handleErrors()}</ul>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange.bind(this)} />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
 
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleOnChange} />
-                  </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleOnChange} />
+                </Form.Group>
 
-                  <Form.Group controlId="formPasswordConfirmation">
-                    <Form.Label>Password Confirmation</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password_confirmation" value={password_confirmation} onChange={this.handleOnChange} />
-                  </Form.Group>
+                <Form.Group controlId="formPasswordConfirmation">
+                  <Form.Label>Password Confirmation</Form.Label>
+                  <Form.Control type="password" placeholder="Password" name="password_confirmation" value={password_confirmation} onChange={this.handleOnChange} />
+                </Form.Group>
 
-                  <Button variant="primary" type="submit">Submit</Button>
-                </Form>
-              </Col>
-            </Row>
-          </Container>
-        </React.Fragment>
+                <Button variant="primary" type="submit">Submit</Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
       )
     }
 }

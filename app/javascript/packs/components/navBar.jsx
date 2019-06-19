@@ -8,10 +8,8 @@ class NavigationBar extends React.Component {
         
         if (status == 'true') {
             return (
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                        </Nav>
-                        <Nav>
                             <NavLink to="/profile" className="nav-link" role="button">
                                 Profile
                             </NavLink>
@@ -24,8 +22,8 @@ class NavigationBar extends React.Component {
             )
         } else {
             return (
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav>
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
                             <NavLink to="/login" className="nav-link" role="button">
                                 Log In
                             </NavLink>

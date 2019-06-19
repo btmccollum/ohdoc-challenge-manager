@@ -73,7 +73,14 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'capybara'
   gem 'pry'
+end
+
+group :test do
+  gem 'capybara-screenshot'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
 end
 
 group :development do
