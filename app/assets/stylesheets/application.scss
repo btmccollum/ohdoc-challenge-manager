@@ -27,21 +27,28 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
 }
 
 .mainContentRow {
-    padding-top: 7.5%;
+    padding-top: 6%;
 }
 
 .contentRow {
     padding-top: 5%;
 }
 
+// --- NAVBAR ---
+
 .topNav {
+    display: flex !important;
     background: rgb(43, 40, 40);
-    // position: relative !important;
     margin: 0 !important;
 }
 
 a.navbar-brand, a.nav-link {
     color: white !important;
+}
+
+#navRight {
+    display: flex;
+    margin-left: auto !important;
 }
 
 // --- GENERAL USE CLASSES ---
@@ -73,6 +80,7 @@ a.navbar-brand, a.nav-link {
 }
 
 .frontPageRow {
+    padding-top: 10%;
     width: 100vw;
 }
 
@@ -179,7 +187,9 @@ a.navbar-brand, a.nav-link {
         padding-top: 10%;
     }
 
-    .profileBox {
+    .profileBox,
+    .signupBox,
+    .loginBox {
         background: white;
         border: 1px solid rgb(43, 40, 40);
         border-radius: 5px;
@@ -191,6 +201,15 @@ a.navbar-brand, a.nav-link {
 
 @media (max-width: 550px)  {
     .mainContentRow {
-        padding-top: 13.5%;
+        padding-top: 15%;
+    }
+
+    .profileBox {
+        background: white;
+        border: 1px solid rgb(43, 40, 40);
+        border-radius: 5px;
+        box-shadow: 4.75px 6.5px;
+        margin-top: 5%;
+        margin-left: 5%;
     }
 }

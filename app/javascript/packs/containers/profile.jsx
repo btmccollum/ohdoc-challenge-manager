@@ -108,7 +108,7 @@ class Profile extends React.Component {
                             <Col>
                                 <span className="profileSection">Account Actions:</span>
                                 <p>
-                                    Delete Account - Click <Button variat="link" onClick={() => this.deleteUserAccount()}>here</Button> to delete your account. This cannot be undone.
+                                    <Button variant="danger" onClick={() => this.deleteUserAccount()}>Delete Account</Button> Warning! This action cannot be undone.
                                 </p>
                             </Col>
                         </Row>

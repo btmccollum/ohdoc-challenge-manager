@@ -7,8 +7,8 @@ class NavigationBar extends React.Component {
         status = this.props.loggedIn
         
         if (status == 'true') {
-            return (
-                <Nav>
+            return (   
+                <Nav className="ml-auto">
                     <NavLink to="/profile" className="nav-link" role="button">
                         Profile
                     </NavLink>
@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
             )
         } else {
             return (
-                <Nav>
+                <Nav className="ml-auto">
                     <NavLink to="/login" className="nav-link" role="button">
                         Log In
                     </NavLink>
@@ -41,7 +41,7 @@ class NavigationBar extends React.Component {
                 </NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav navRight">
                     {this.renderOptions()}
                 </Navbar.Collapse>
             </Navbar>
