@@ -14,6 +14,7 @@ import { authenticateUser, logoutUser } from './actions/userActions';
 import Login from './containers/login'
 import Profile from './containers/profile'
 import NavigationBar from './components/navBar'
+import NotFound from './components/notFound'
 
 class App extends Component {
   componentWillMount() {
@@ -24,22 +25,25 @@ class App extends Component {
     return (
       <Router>
         <NavigationBar loggedIn={loggedIn()} />
-        <Route exact path ="/" component={ 
-                () => {
-                  if (loggedIn()) {
-                    return <LandingPage /> 
-                  } else {
-                    return <Redirect to="/login"/> 
+        <Switch>
+          <Route exact path ="/" component={ 
+                  () => {
+                    if (loggedIn()) {
+                      return <LandingPage /> 
+                    } else {
+                      return <Redirect to="/login"/> 
+                    }
                   }
-                }
-              }/>   
-        <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
-        <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
-        <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
-        <Route path='/logout' render={ props => { 
-          this.props.logoutUser();
-          return <Redirect to="/"/>  
-        }} />
+                }/>   
+          <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
+          <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
+          <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
+          <Route path='/logout' render={ props => { 
+            this.props.logoutUser();
+            return <Redirect to="/"/>  
+          }} />
+          <Route path="/*" component={NotFound} />
+        </Switch>
       </Router>
     )
   }

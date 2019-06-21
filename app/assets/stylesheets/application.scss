@@ -34,6 +34,27 @@ html, body, #ohdoc-challenge-manager, #ohdoc-challenge-manager>div {
     padding-top: 5%;
 }
 
+// --- 404 ---
+
+.nopageContainer {
+    display: flex !important;
+}
+
+.nopageRow {
+    width: 100vw;
+}
+
+.nopageCol {
+    text-align: center;
+}
+
+.no-page-found-return {
+    background: rgb(43, 40, 40);
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
 // --- NAVBAR ---
 
 .topNav {

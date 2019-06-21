@@ -40,7 +40,7 @@ class LandingPage extends React.Component {
   loadContent = () => {
     if (loggedIn() === true) {
       return (
-        <Container className="mainContentRow">
+        <Container className="nopageContainer">
           <Row className="justify-content-md-center ">
             <TweetForm />
             <CommitForm />
