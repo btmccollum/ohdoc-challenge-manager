@@ -66,7 +66,7 @@ class Profile extends React.Component {
 
         return (
             <Container className="profileContainer">
-                <Row className="justify-content-md-center w-100">
+                <Row className="justify-content-md-center w-100 contentRow">
                     <Col md={{ span: 7 }} className="profileBox align-self-center">
                         <h1 className="profileHeader">ohdoc!</h1>
                         <h2>Account Settings:</h2>

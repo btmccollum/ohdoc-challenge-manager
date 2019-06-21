@@ -133,10 +133,10 @@ class TweetForm extends React.Component {
                         { this.handleDisplayName() }
                             
                         { this.displayTweetForm() }
+
+                        <SubmittedModal show={this.state.show} onHide={this.hideModal} content="Tweet" />
                     </Col>
                 </Row>
-
-                <SubmittedModal show={this.state.show} onHide={this.hideModal} content="Tweet" />
             </Container>         
         )
     }

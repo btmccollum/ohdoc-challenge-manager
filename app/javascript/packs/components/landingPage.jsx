@@ -40,8 +40,8 @@ class LandingPage extends React.Component {
   loadContent = () => {
     if (loggedIn() === true) {
       return (
-        <Container>
-          <Row className="justify-content-md-center">
+        <Container className="mainContentRow">
+          <Row className="justify-content-md-center ">
             <TweetForm />
             <CommitForm />
             <GettingStartedModal show={this.state.show} onHide={this.hideModal} />
