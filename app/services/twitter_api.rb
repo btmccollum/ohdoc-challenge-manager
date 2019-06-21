@@ -1,4 +1,4 @@
-module TwitterAPI
+module TwitterApi
   class SendTweet < ApplicationService
     attr_reader :tweet_content
     
@@ -14,8 +14,8 @@ module TwitterAPI
         config.access_token        = @current_user.twitter_token
         config.access_token_secret = @current_user.twitter_token_secret
       end
-        # using Twitter gem update method to send update/status (tweet)
-        client.update(@tweet_content)
+      # using Twitter gem update method to send update/status (tweet)
+      client.update(@tweet_content)
     end
-end
+  end
 end
