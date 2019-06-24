@@ -27,6 +27,8 @@ module GithubApi
       end
     end
 
+    # necessary to pull a repo's sha in order to submit updates
+    # in future this would be beneficial to persist to DB 
     def get_sha_and_contents
       repo_req = @api.get do |req|
         req.headers['User-Agent'] = "#{@user_agent}"
@@ -38,10 +40,9 @@ module GithubApi
       return { sha: repo_sha, content: repo_contents }      
     end
 
-    # def format_content(title, progress, thoughts, link) 
+    # github content is base64 encoded and must be received as such
+    # decoding existing content to then append the new content and re encode it
     def format_content(old_content)
-      # github content is base64 encoded and must be received as such
-      # decoding existing content to then append the new content and re encode it
       file_content = Base64.decode64(old_content) << @content
       return new_file_content = Base64.encode64(file_content)
     end
