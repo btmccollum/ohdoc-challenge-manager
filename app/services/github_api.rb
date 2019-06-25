@@ -2,10 +2,8 @@ require "base64"
 
 module GithubApi
   class UpdateMarkdownFile < ApplicationService
-    # attr_reader :content, :title, :progress, :thoughts, :link
     attr_reader :title, :content
 
-    # def initialize(user_agent, title, content, progress, thoughts, link, current_user)
     def initialize(user_agent, title, content, current_user)
         @user_agent = user_agent
         @title = title

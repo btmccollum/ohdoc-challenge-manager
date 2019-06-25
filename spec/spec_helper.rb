@@ -14,7 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  require 'capybara/rspec'
+  # require 'capybara/rspec'
+  Dir["./spec/support/**/*.rb"].each { |f| require f }
   
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -95,5 +96,9 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Require every ruby file inside the spec/support directory, and subdirectories, 
+  # so that it can be used directly in your tests.
+  
 end
 
