@@ -24,6 +24,7 @@ class User < ApplicationRecord
     return jwt
   end
 
+  # used for identifying a user is valid on third party api calls
   def generate_state_token
     self.state_token = Sysrandom.urlsafe_base64(32)
     self.save
@@ -35,5 +36,29 @@ class User < ApplicationRecord
     self.uid = auth.id
     self.github_token = auth.credentials.token
     self.github_username = auth.extra.raw_info.login
+  end
+
+  # used for password reset token
+  def generate_password_token!
+    self.reset_password_token = generate_token
+    self.reset_password_sent_at = Time.now.utc
+    save!
+  end
+  
+  # a password reset token is valid for 1 hour 
+  def password_token_valid?
+    (self.reset_password_sent_at + 1.hours) > Time.now.utc
+  end
+  
+  def reset_password!(password)
+    self.reset_password_token = nil
+    self.password = password
+    save!
+  end
+  
+  private
+  
+  def generate_token
+    SecureRandom.hex(10)
   end
 end

@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :password_resets, only: %i[create edit update]
+  post 'password/forgot', to: 'password_resets#forgot'
+  post 'password/reset', to: 'password_resets#reset'
   
   get 'logout', to: "api/v1/sessions#destroy"
 
