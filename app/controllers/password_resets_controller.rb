@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
     if user.present? && user.confirmed_at?
       user.generate_password_token!
 
-      # insert mailer action here
+      user.send_password_reset_email
 
       render json: { status: 'ok' }, status: :ok
     else
