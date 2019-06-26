@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
 import { linkTwitterAccount } from '../../actions/userActions'
-import SubmittedModal from '../../containers/submittedModal'
+import SubmittedModal from '../containers/submittedModal'
 
 
 class TweetForm extends React.Component {

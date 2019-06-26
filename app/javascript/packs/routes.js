@@ -15,6 +15,7 @@ import Login from './containers/login'
 import Profile from './containers/profile'
 import NavigationBar from './components/navBar'
 import NotFound from './components/notFound'
+import ForgotPassword from './components/forgotPassword'
 
 class App extends Component {
   componentWillMount() {
@@ -42,6 +43,7 @@ class App extends Component {
             this.props.logoutUser();
             return <Redirect to="/"/>  
           }} />
+          <Route path='/password/forgot' component={ () => loggedIn() ? <Redirect to="/"/> : <ForgotPassword /> }/>
           <Route path="/*" component={NotFound} />
         </Switch>
       </Router>

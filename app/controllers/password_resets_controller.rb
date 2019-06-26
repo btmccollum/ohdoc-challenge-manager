@@ -20,7 +20,7 @@ class PasswordResetsController < ApplicationController
     token = params[:token].to_s
 
     if params[:email].blank?
-      returnn render json: { error: 'Token not provided.' }
+      render json: { error: 'Token not provided.' }
     end
 
     user = User.find_by(reset_password_token: token)
