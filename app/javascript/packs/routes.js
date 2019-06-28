@@ -15,7 +15,7 @@ import Login from './containers/login'
 import Profile from './containers/profile'
 import NavigationBar from './components/navBar'
 import NotFound from './components/notFound'
-import ForgotPassword from './components/forgotPassword'
+import ForgotPassword from './containers/forgotPassword'
 
 class App extends Component {
   componentWillMount() {

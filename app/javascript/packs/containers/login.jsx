@@ -69,6 +69,9 @@ class Login extends Component {
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleOnChange} />
+                <Form.Text className="text-muted">
+                  <Link to="/password/forgot">Forgot password?</Link>
+                </Form.Text>
               </Form.Group>
 
               <Button variant="primary" type="submit">Submit</Button>

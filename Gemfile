@@ -77,6 +77,7 @@ group :development, :test do
   gem 'pry'
   gem 'vcr'
   gem 'webmock'
+  gem 'mailcatcher'
 end
 
 group :test do

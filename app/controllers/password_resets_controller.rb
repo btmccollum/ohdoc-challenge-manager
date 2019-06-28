@@ -1,19 +1,26 @@
 class PasswordResetsController < ApplicationController
+  skip_before_action :authenticate_user
+
   def forgot
-    if paras[:email].blank?
+    if params[:email].blank?
       return render json: {error: 'Please provide a valid email address.'}
     end
 
-    user = User.find_by(email: email.downcase)
+    user_email = params[:email].downcase.strip
 
-    if user.present? && user.confirmed_at?
+    user = User.find_by(email: user_email)
+
+    if user.present?
       user.generate_password_token!
 
       user.send_password_reset_email
 
+      binding.pry
+
       render json: { status: 'ok' }, status: :ok
     else
       render json: { error: ['Email address provided is not valid. Please try again.'] }, status: :not_found
+    end
   end
 
   def reset

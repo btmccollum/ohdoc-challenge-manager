@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { addError, clearErrors } from '../../actions/errorActions';
 import cuid from 'cuid';
 import { linkGithubAccount, updateUser } from '../../actions/userActions'
-import SubmittedModal from '../containers/submittedModal'
+import SubmittedModal from '../submittedModal'
 
 class CommitForm extends React.Component {
     constructor(props) {

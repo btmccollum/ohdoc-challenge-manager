@@ -174,6 +174,24 @@ export const deleteUser = (id, callback) => {
   }
 }
 
+export const sendPasswordReset = (user_email, callback) => {
+  const data = { email: user_email }
+  setHeaders(null)
+
+  return dispatch => {
+    axios.post('/password/forgot', data)
+      .then(json => {
+        debugger;
+      })
+      .catch(error => {
+        dispatch({ 
+          type: 'SHOW_ERROR', 
+          payload: error.response.data.error 
+        })
+      })
+  }
+}
+
 // --------------- USER ACCOUNT ACTIONS ---------------
 
 export const linkGithubAccount = () => {
