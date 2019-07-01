@@ -21,6 +21,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def reset
+    binding.pry
     token = params[:token].to_s
 
     if params[:email].blank?
