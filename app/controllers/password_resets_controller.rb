@@ -12,10 +12,7 @@ class PasswordResetsController < ApplicationController
 
     if user.present?
       user.generate_password_token!
-
       user.send_password_reset_email
-
-      binding.pry
 
       render json: { status: 'ok' }, status: :ok
     else

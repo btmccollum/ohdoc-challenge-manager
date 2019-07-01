@@ -58,7 +58,6 @@ class User < ApplicationRecord
 
   # send password reset email
   def send_password_reset_email
-    binding.pry
     UserMailer.password_reset(self).deliver_now
   end
   

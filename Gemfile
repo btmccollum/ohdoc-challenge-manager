@@ -75,8 +75,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'capybara'
   gem 'pry'
-  gem 'vcr'
-  gem 'webmock'
   gem 'mailcatcher'
 end
 
@@ -84,6 +82,8 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
