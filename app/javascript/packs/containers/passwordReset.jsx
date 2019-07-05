@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { updateUser } from '../actions/userActions';
 import { addError, clearErrors } from '../actions/errorActions';
+import { convertQueryString } from '../utils/convertQueryString';
 
 class PasswordReset extends React.Component {
     state = {
@@ -48,7 +49,7 @@ class PasswordReset extends React.Component {
 
     render() {
         const { password, password_confirmation } = this.state;
-        
+
         return (
             <Container>
                 <Row>
@@ -89,4 +90,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     clearErrors,
 }, dispatch)
 
-export default connect(mapStateToProps, null)(PasswordReset);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordReset);

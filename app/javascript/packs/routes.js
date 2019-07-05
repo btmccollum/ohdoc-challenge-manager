@@ -17,6 +17,7 @@ import NavigationBar from './components/navBar'
 import NotFound from './components/notFound'
 import ForgotPassword from './containers/forgotPassword'
 import PasswordReset from './containers/passwordReset'
+import { convertQueryString } from './utils/convertQueryString';
 
 class App extends Component {
   componentWillMount() {
@@ -44,8 +45,8 @@ class App extends Component {
             this.props.logoutUser();
             return <Redirect to="/"/>  
           }} />
-          <Route path='/password/forgot' component={ () => loggedIn() ? <Redirect to="/"/> : <ForgotPassword /> }/>
-          <Route path='/password/reset' component={ () => loggedIn() ? <Redirect to="/"/> : <PasswordReset /> }/>
+          <Route path='/password/forgot' component={ () => loggedIn() ? <Redirect to="/" /> : <ForgotPassword /> }/>
+          <Route path='/password/reset' component={ () => validResetLink() ? <PasswordReset /> : <Redirect to="/"/> }/>
           <Route path="/*" component={NotFound} />
         </Switch>
       </Router>
@@ -60,5 +61,17 @@ const mapStateToProps = state => {
 }
 
 const loggedIn = () => !!sessionStorage['logged_in'];
+
+// identify if user has a valid url structure (not just accessing route by password/reset) and is not logged in
+function validResetLink() {
+  if (loggedIn()) return false;
+
+  let queryObj = convertQueryString(window.location.search);
+  if (queryObj.email !== undefined && queryObj.token !== undefined) {
+    return true
+  } else {
+    return false
+  }
+}
 
 export default connect(mapStateToProps, { logoutUser, authenticateUser })(App);
