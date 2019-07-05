@@ -30,7 +30,7 @@ class Signup extends Component {
 
     handleErrors = () => {
       if (this.props.errors.length > 0) { 
-        setTimeout(this.props.clearErrors, 5000)
+        setTimeout(this.props.clearErrors, 10000)
         return (
           this.props.errors.map(error => <li key={cuid()}>{error}</li>)
         )
