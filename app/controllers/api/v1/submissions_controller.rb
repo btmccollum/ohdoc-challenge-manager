@@ -17,25 +17,17 @@ class Api::V1::SubmissionsController < ApplicationController
     if params[:service] == "twitter"
       # need to pass in tweet content and current_user to have access to tokens
       TwitterApi::SendTweet.call(submission_params[:tweet], current_user)
-
-      user_submission.tap do |submission|
-        submission.title = "#100DOC Tweet"
-        submission.twitter = true 
-        submission.content = submission_params[:tweet]
-      end
+      user_submission.update(title: "100DOC Tweet", twitter: true, content: submission_params[:tweet])
     elsif params[:service] == "github"
       # creating content markdown blurb to add to user's existing log md file on github
       content = "### #{submission_params[:entryTitle]}\n\n **Today's Progress:** #{submission_params[:progress]}\n\n **Thoughts:** #{submission_params[:thoughts]}\n\n **Link(s):** #{submission_params[:link]}\n "
 
       # need to pass in user agent, the title, content to be appended, and current user for access to tokens
-      GithubApi::UpdateMarkdownFile.call('OHDOC Challenge Manager', submission_params[:entryTitle], content, current_user)
-      
-      # setting github specific data
-      user_submission.tap do |submission|
-        submission.title = submission_params[:entryTitle]
-        submission.github = true 
-        submission.content = content
-      end
+      GithubApi::UpdateMarkdownFile.call('OHDOC Challenge Manager', 
+                                          submission_params[:entryTitle], 
+                                          content, 
+                                          current_user)
+      user_submission.update(title: submission_params[:entryTitle], github: true, content: content)
     end
 
     if user_submission.save

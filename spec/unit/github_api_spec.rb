@@ -21,6 +21,5 @@ describe GithubApi do
       end
     end
 
-
   end
 end
