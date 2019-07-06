@@ -33,13 +33,12 @@ gem 'devise', '~> 4.6', '>= 4.6.2'
 
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
 
-gem 'thin'
-
 gem 'attr_encrypted', '~> 3.1'
 
-gem 'oauth'
+# oauth/omniauth grouping
+gem 'oauth', '~> 0.5.4'
 
-gem 'omniauth'
+gem 'omniauth', '~> 1.9'
 
 gem 'omniauth-oauth2', '~> 1.6'
 
@@ -47,7 +46,9 @@ gem 'omniauth-twitter', '~> 1.4'
 
 gem 'omniauth-github', '~> 1.3'
 
-gem 'twitter'
+gem 'twitter', '~> 6.2'
+
+# authentication back/front
 
 gem 'jwt', '~> 2.1'
 
@@ -71,17 +72,17 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'capybara'
+  gem 'geckodriver-helper'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
   gem 'pry'
   gem 'mailcatcher'
+  gem 'thin'
 end
 
 group :test do
-  gem 'capybara-screenshot'
   gem 'database_cleaner'
-  gem 'selenium-webdriver'
   gem 'vcr'
   gem 'webmock'
 end

@@ -14,7 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  # require 'capybara/rspec'
+  require 'capybara/rspec'
   Dir["./spec/support/**/*.rb"].each { |f| require f }
   
   # rspec-expectations config goes here. You can use an alternate
@@ -99,6 +99,9 @@ RSpec.configure do |config|
 
   # Require every ruby file inside the spec/support directory, and subdirectories, 
   # so that it can be used directly in your tests.
-  
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :firefox)
+  end
+
 end
 
