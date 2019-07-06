@@ -49,7 +49,7 @@ class Signup extends Component {
       return (
         <Container className="signupContainer">
           <Row className="justify-content-md-center frontPageRow">
-            <Col md={{ span: 6 }} className="signupBox">
+            <Col md={{ span: 6 }} className="signup-box">
               <Form onSubmit={this.handleOnSubmit} className="signup">
               <h1>ohdoc!</h1>
               <ul>{this.handleErrors()}</ul>

@@ -66,7 +66,9 @@ const loggedIn = () => !!sessionStorage['logged_in'];
 function validResetLink() {
   if (loggedIn()) return false;
 
-  let queryObj = convertQueryString(window.location.search);
+  const queryObj = convertQueryString(window.location.search);
+
+  // if a user just tries to access password/reset then they wont have any queryParams
   if (queryObj.email !== undefined && queryObj.token !== undefined) {
     return true
   } else {

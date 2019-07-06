@@ -92,7 +92,9 @@ a.navbar-brand, a.nav-link {
     padding: 1.5%;
 }
 
-.loginBox{
+.login-box,
+.signup-box,
+.password-reset{
     background: white;
     border: 1px solid rgb(43, 40, 40);
     border-radius: 5px;
@@ -107,14 +109,6 @@ a.navbar-brand, a.nav-link {
 
 .signupContainer {
     padding: 1.5%;
-}
-
-.signupBox{
-    background: white;
-    border: 1px solid rgb(43, 40, 40);
-    border-radius: 5px;
-    box-shadow: 4.75px 6.5px;
-    padding: 15px;
 }
 
 // --- TWITTER CONTAINER CONTENTS ---

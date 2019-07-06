@@ -52,8 +52,8 @@ class PasswordReset extends React.Component {
 
         return (
             <Container>
-                <Row>
-                    <Col>
+                <Row className="justify-content-md-center frontPageRow">
+                    <Col md={{ span: 8 }}>
                         <Form onSubmit={this.onSubmit} className="password-reset">
                             <h1>Reset Your Password:</h1>
                             <ul>{this.handleErrors()}</ul>
