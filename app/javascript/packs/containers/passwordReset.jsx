@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { updateUser } from '../actions/userActions';
+import { submitPasswordReset } from '../actions/userActions';
 import { addError, clearErrors } from '../actions/errorActions';
 import { convertQueryString } from '../utils/convertQueryString';
+import { withRouter } from 'react-router-dom';
 
 class PasswordReset extends React.Component {
     state = {
@@ -20,12 +21,14 @@ class PasswordReset extends React.Component {
         this.setState(state)
     }
     
-    onSubmit = event => {
-        event.preventDefault()
+    handleOnSubmit = event => {
+        event.preventDefault();
 
-        if (this.state.email !== '' && this.state.password !== '') {
-            const user = this.state
-            this.props.loginUser(user, () => this.props.history.push('/'))
+        if (this.state.password !== '' && this.state.password_confirmation !== '') {
+            const email_and_token = convertQueryString(window.location.search)
+            const user_data_to_update = Object.assign(this.state, email_and_token)
+            
+            this.props.submitPasswordReset(user_data_to_update , () => this.props.history.push('/'))
         } else {
             this.props.clearErrors()
             this.props.addError("All fields are required.")
@@ -54,7 +57,7 @@ class PasswordReset extends React.Component {
             <Container>
                 <Row className="justify-content-md-center frontPageRow">
                     <Col md={{ span: 8 }}>
-                        <Form onSubmit={this.onSubmit} className="password-reset">
+                        <Form onSubmit={this.handleOnSubmit} className="password-reset">
                             <h1>Reset Your Password:</h1>
                             <ul>{this.handleErrors()}</ul>
                             <Form.Group controlId="formBasicPassword">
@@ -85,9 +88,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    updateUser,
+    submitPasswordReset,
     addError,
     clearErrors,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordReset);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordReset));

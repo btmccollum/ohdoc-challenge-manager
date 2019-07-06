@@ -168,6 +168,7 @@ export const deleteUser = (id, callback) => {
           type: 'DELETE_USER',
         })
 
+        // callback is forcing user to root route after change is made
         callback()
       })
     .catch(error => {console.log(error.message)})
@@ -181,7 +182,23 @@ export const sendPasswordReset = (user_email, callback) => {
   return dispatch => {
     axios.post('/password/forgot', data)
       .then(json => {
-        debugger;
+        // send user back to login page
+        callback()
+      })
+      .catch(error => {
+        dispatch({ 
+          type: 'SHOW_ERROR', 
+          payload: error.response.data.error 
+        })
+      })
+  }
+}
+
+export const submitPasswordReset = (user_data, callback) => {
+  return dispatch => {
+    axios.post('/password/reset', user_data)
+      .then(json => {
+        callback()
       })
       .catch(error => {
         dispatch({ 
