@@ -16,11 +16,12 @@ class Api::V1::SessionsController < ApplicationController
         render json: { errors: ["Invalid password."] }, status: 400
       end
     else
-      render json: { error: ["Invalid e-mail."] }, status: 404
+      binding.pry
+      render json: { errors: ["Invalid e-mail."] }, status: 404
     end
   end
 
   def destroy
-      render json: { error: { message: "Successful" }, status: :ok }
+      render json: { errors: { message: "Successful" }}, status: :ok 
   end
 end

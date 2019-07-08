@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user, only: %i[create]
 
   def authorize
-    user_hash = UserSerializer.new(current_user).serializable_hash
+    user_hash = create_user_hash(current_user)
     jwt = current_user.generate_jwt
     render json: { user: user_hash, jwt: jwt }, status: :ok
   end
@@ -11,11 +11,12 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      user_hash = UserSerializer.new(user).serializable_hash
+      user_hash = create_user_hash(user)
+      binding.pry
       jwt = user.generate_jwt
       render json: { user: user_hash, jwt: jwt }, status: :ok
     else
-      render json: { errors: user.errors.full_messages }, status: 400   
+      render json: { errors: user.errors.full_messages }, status: 400
     end
   end
 
@@ -23,21 +24,19 @@ class Api::V1::UsersController < ApplicationController
     if params[:id].to_i == current_user.id
       # update user based on user_params passed in and create new user_hash to pass back
       url = user_params[:github_repo_url]
-
       current_user.update(user_params)
-
-      user_hash = UserSerializer.new(current_user).serializable_hash
+      user_hash = create_user_hash(current_user)
       jwt = current_user.generate_jwt
 
       render json: {user: user_hash, jwt: jwt}, status: :ok
     else
-      render json: { error: ["Unauthorized access"] }, status: 422
+      render json: { error: ['Unauthorized access'] }, status: 422
     end
   end
 
   def destroy
-    atest = current_user.destroy
-    render json: { message: "Successful" }, status: 202
+    render json: { message: 'Successful' }, status: 202
+    current_user.destroy
   end
 
   # a user must be redirected to GitHub's access page to provide authorization to app
@@ -50,32 +49,30 @@ class Api::V1::UsersController < ApplicationController
         client_id: ENV['GITHUB_KEY'],
         redirect_uri: ENV['GH_RURI'],
         state: current_user.state_token,
-        scope: "repo" 
+        scope: 'repo' 
       }.to_query,
-      url: "https://github.com/login/oauth/authorize?"
+      url: 'https://github.com/login/oauth/authorize?'
     }
 
     render json: redirect_info
   end
 
   def twitter_authorization
-    # using OAuth gem to create a new consumer object to grab request token from twitter, need to use OAuth1 strat for Twitter only
+    # using OAuth gem to create a new consumer object to grab request
+    # token from twitter, need to use OAuth1 strat for Twitter only
     # see : https://github.com/oauth-xx/oauth-ruby
-    
+
     consumer = OAuth::Consumer.new(
       ENV['TWITTER_KEY'], 
       ENV['TWITTER_SECRET'], 
       site: "https://api.twitter.com", 
       oauth_callback: ENV['TWITTER_RURI']
     )
-   
+  
     request_token_step = consumer.get_request_token(oauth_callback: ENV['TWITTER_RURI'])
-
     request_token = request_token_step.token
     request_secret = request_token_step.secret
-
     current_user.update(state_token: request_token, state_token_verify: request_secret)
-
     # generate auth link user must visit to provide permission
     redirect_url = request_token_step.authorize_url(oauth_callback: ENV['TWITTER_RURI'])
   
@@ -84,7 +81,19 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
+  def create_user_hash(user)
+    return UserSerializer.new(user).serializable_hash
+  end
+
   def user_params
-    params.require(:user).permit(:twitter_username, :github_username, :email, :password, :password_confirmation, :twitter_token, :github_token, :github_repo_url, :github_repo_path,)
+    params.require(:user).permit(:twitter_username, 
+                                 :github_username, 
+                                 :email, 
+                                 :password, 
+                                 :password_confirmation, 
+                                 :twitter_token, 
+                                 :github_token, 
+                                 :github_repo_url, 
+                                 :github_repo_path,)
   end
 end
