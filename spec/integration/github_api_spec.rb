@@ -20,6 +20,5 @@ describe GithubApi do
         expect(res['commit'].keys).to include('message')
       end
     end
-
   end
 end

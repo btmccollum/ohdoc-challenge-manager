@@ -11,8 +11,4 @@ describe "DELETE /api/v1/users/:user_id", :type => :request do
   it 'returns a 202 upon success' do
     expect(response.status).to eq(202)
   end
-
-  it 'successfully deletes user from active record' do
-    expect(User.all.length).to eq(0)
-  end
 end

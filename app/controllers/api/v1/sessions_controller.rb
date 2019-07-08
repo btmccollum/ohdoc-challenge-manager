@@ -16,7 +16,6 @@ class Api::V1::SessionsController < ApplicationController
         render json: { errors: ["Invalid password."] }, status: 400
       end
     else
-      binding.pry
       render json: { errors: ["Invalid e-mail."] }, status: 404
     end
   end

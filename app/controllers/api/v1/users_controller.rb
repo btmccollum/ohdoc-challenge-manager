@@ -12,7 +12,6 @@ class Api::V1::UsersController < ApplicationController
 
     if user.save
       user_hash = create_user_hash(user)
-      binding.pry
       jwt = user.generate_jwt
       render json: { user: user_hash, jwt: jwt }, status: :ok
     else
