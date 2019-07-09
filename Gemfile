@@ -48,6 +48,8 @@ gem 'omniauth-github', '~> 1.3'
 
 gem 'twitter', '~> 6.2'
 
+gem 'omniauth-rails_csrf_protection'
+
 # authentication back/front
 
 gem 'jwt', '~> 2.1'
