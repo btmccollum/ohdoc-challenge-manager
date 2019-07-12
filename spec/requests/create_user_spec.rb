@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "create users route", :type => :request do
-
   before do
     post '/api/v1/users', params: { :user => { :email => 'testaccount01@test.com', :password => '123456', :password_confirmation => '123456'}}
     @json_data = JSON.parse(response.body)
