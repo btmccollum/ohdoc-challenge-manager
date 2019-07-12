@@ -4,6 +4,8 @@ The ohdoc challenge mananger is now deployed on Heroku! This application is stil
 
 Check out a short video demo here: https://youtu.be/ydjxRvn5ImM
 
+![Image of OHDOC Manager](https://imgur.com/zWi5l4h)
+
 ## Deployed On:
 * Heroku
 
