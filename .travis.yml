@@ -20,6 +20,7 @@ services:
 script:
   - rm -rf bin/webpack*
   - RAILS_ENV=test bundle exec rails webpacker:compile
+  - rails webpacker:install
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
