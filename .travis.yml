@@ -1,6 +1,8 @@
 sudo: required
 dist: trusty
 addons:
+  postgresql: "9.4"
+  firefox: latest
   apt:
     sources:
       - google-chrome
@@ -10,8 +12,6 @@ addons:
 language: ruby
 rvm:
   - 2.6.2
-addons:
-  postgresql: "9.4"
 env:
   matrix:
       - DB=postgresql
