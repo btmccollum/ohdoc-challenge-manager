@@ -36,7 +36,7 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
 gem 'attr_encrypted', '~> 3.1'
 
 # oauth/omniauth grouping
-gem 'oauth', '~> 0.5.4'
+gem 'oauth', '~> 0.5.5'
 
 gem 'omniauth', '~> 1.9'
 
