@@ -207,7 +207,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
-    puma (3.12.6)
+    puma (4.3.9)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-protection (2.0.5)
       rack
@@ -384,7 +385,7 @@ DEPENDENCIES
   omniauth-twitter (~> 1.4)
   pg (>= 0.18, < 2.0)
   pry
-  puma (~> 3.12)
+  puma (~> 4.3)
   rails (~> 6.0.0.rc1)
   rspec-rails (~> 3.8, >= 3.8.2)
   sass-rails (~> 5.0)
